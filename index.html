@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hiyar</title>
+    <link rel="stylesheet" href="static/styles/style.css">
+    <head>
+    <meta charset="UTF-8">
+    <title>Hiyar</title>
+
+    <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥒</text></svg>">
+</head>
+    <div class="logo">
+    🥒 ХЫЯР
+</div>
+
+
+</head>
+
+<body>
+    <style>
+body{
+    margin:0;
+    height:100vh;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    overflow:hidden;
+    font-family:Arial,sans-serif;
+}
+
+#box{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+button{
+    padding:12px 30px;
+    margin:10px;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    color:white;
+}
+
+.yes{
+    background:#28a745;
+}
+
+.no{
+    background:#dc3545;
+}
+</style>
+</head>
+<body>
+
+<div id="box">
+    <div class="logo">🥒</div>
+
+    <h1>Муха хыяр?</h1>
+
+    <button class="yes" onclick="openVideo()">Да</button>
+    <button class="no" onclick="moveQuestion()">Нет</button>
+</div>
+
+<script>
+function openVideo(){
+    window.open(
+        "https://www.youtube.com/watch?v=cvkGrjstY04",
+        "_blank"
+    );
+}
+
+function moveQuestion(){
+    let box = document.getElementById("box");
+
+    let maxX = window.innerWidth - box.offsetWidth;
+    let maxY = window.innerHeight - box.offsetHeight;
+
+    let x = Math.random() * maxX;
+    let y = Math.random() * maxY;
+
+    box.style.left = x + "px";
+    box.style.top = y + "px";
+    box.style.transform = "none";
+}
+</script>
+    </body>
+    
+    </html>
