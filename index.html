@@ -1,104 +1,302 @@
-<!doctype html>
-<html lang="en">
 
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hiyar</title>
-    <link rel="stylesheet" href="static/styles/style.css">
-    <head>
-    <meta charset="UTF-8">
-    <title>Hiyar</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhavgorode</title>
 
-    <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥒</text></svg>">
-</head>
-    <div class="logo">
-    🥒 ХЫЯР
-</div>
-
-
-</head>
-
-<body>
-    <style>
-body{
+<style>
+*{
     margin:0;
-    height:100vh;
-    background:linear-gradient(135deg,#667eea,#764ba2);
-    overflow:hidden;
+    padding:0;
+    box-sizing:border-box;
     font-family:Arial,sans-serif;
 }
 
-#box{
-    position:absolute;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    text-align:center;
-    background:white;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.3);
+body{
+    background:linear-gradient(180deg,#87ceeb,#dff6ff);
+    overflow:hidden;
 }
 
-h1{
-    margin-bottom:20px;
+/* MENU */
+
+#menu{
+    position:absolute;
+    width:100%;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+}
+
+#menu h1{
+    font-size:60px;
+    color:#222;
+    text-shadow:3px 3px 10px white;
+}
+
+#menu p{
+    font-size:20px;
 }
 
 button{
-    padding:12px 30px;
-    margin:10px;
+    padding:15px 40px;
     border:none;
-    border-radius:10px;
-    font-size:18px;
-    font-weight:bold;
+    border-radius:15px;
+    font-size:22px;
     cursor:pointer;
+    background:#4CAF50;
     color:white;
+    transition:.3s;
 }
 
-.yes{
-    background:#28a745;
+button:hover{
+    transform:scale(1.1);
 }
 
-.no{
-    background:#dc3545;
+/* GAME */
+
+#game{
+    display:none;
+    width:100vw;
+    height:100vh;
+    position:relative;
+}
+
+#ground{
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:120px;
+    background:#5b8c3a;
+}
+
+#player{
+    position:absolute;
+    bottom:120px;
+    left:100px;
+    width:80px;
+    height:80px;
+
+    background-image:url(img/WhatsApp\ Image\ 2026-06-16\ at\ 11.13.44.jpeg);
+    background-size:contain;
+    background-repeat:no-repeat;
+    background-position:center;
+}
+
+.obstacle{
+    position:absolute;
+    bottom:120px;
+    width:40px;
+    height:80px;
+    background:#1d8b00;
+    border-radius:8px;
+}
+
+#score{
+    position:absolute;
+    top:20px;
+    left:20px;
+    font-size:30px;
+    font-weight:bold;
+}
+
+#speed{
+    position:absolute;
+    top:60px;
+    left:20px;
+    font-size:24px;
+}
+
+#gameOver{
+    display:none;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+}
+
+#gameOver h2{
+    font-size:60px;
+    color:red;
+}
+
+#gameOver button{
+    margin-top:20px;
 }
 </style>
 </head>
 <body>
 
-<div id="box">
-    <div class="logo">🥒</div>
+<div id="menu">
+    <h1>Muhavgorode</h1>
+    <p>Прыгай через препятствия и набирай очки!</p>
+    <button onclick="startGame()">Играть</button>
+</div>
 
-    <h1>Хамза хыяр?</h1>
+<div id="game">
 
-    <button class="yes" onclick="openVideo()">Да</button>
-    <button class="no" onclick="moveQuestion()">Нет</button>
+    <div id="score">Очки: 0</div>
+    <div id="speed">Скорость: 8</div>
+
+    <div id="player"></div>
+
+    <div id="ground"></div>
+
+    <div id="gameOver">
+        <h2>ПРОИГРЫШ</h2>
+        <button onclick="location.reload()">Играть снова</button>
+    </div>
+
 </div>
 
 <script>
-function openVideo(){
-    window.open(
-        "https://www.youtube.com/watch?v=cvkGrjstY04",
-        "_blank"
-    );
+
+let player = document.getElementById("player");
+let game = document.getElementById("game");
+let menu = document.getElementById("menu");
+
+let scoreElement = document.getElementById("score");
+let speedElement = document.getElementById("speed");
+let gameOverBlock = document.getElementById("gameOver");
+
+let score = 0;
+let speed = 8;
+let jumping = false;
+let gameOver = false;
+
+function startGame(){
+    menu.style.display="none";
+    game.style.display="block";
+    createObstacle();
 }
 
-function moveQuestion(){
-    let box = document.getElementById("box");
+function jump(){
 
-    let maxX = window.innerWidth - box.offsetWidth;
-    let maxY = window.innerHeight - box.offsetHeight;
+    if(jumping || gameOver) return;
 
-    let x = Math.random() * maxX;
-    let y = Math.random() * maxY;
+    jumping = true;
 
-    box.style.left = x + "px";
-    box.style.top = y + "px";
-    box.style.transform = "none";
+    speed = Math.min(speed + 0.4,25);
+
+    speedElement.innerHTML =
+    "Скорость: " + speed.toFixed(1);
+
+    let position = 120;
+
+    let up = setInterval(()=>{
+
+        if(position >= 280){
+
+            clearInterval(up);
+
+            let down = setInterval(()=>{
+
+                if(position <= 120){
+
+                    clearInterval(down);
+                    jumping=false;
+                }
+
+                position -= 6;
+                player.style.bottom = position + "px";
+
+            },15);
+
+        }
+
+        position += 6;
+        player.style.bottom = position + "px";
+
+    },15);
 }
+
+document.addEventListener("keydown",(e)=>{
+    if(e.code==="Space" || e.code==="ArrowUp"){
+        jump();
+    }
+});
+
+document.addEventListener("touchstart",()=>{
+    jump();
+});
+
+document.addEventListener("click",(e)=>{
+
+    if(
+        e.target.tagName !== "BUTTON" &&
+        game.style.display==="block"
+    ){
+        jump();
+    }
+});
+
+function createObstacle(){
+
+    if(gameOver) return;
+
+    let obstacle = document.createElement("div");
+    obstacle.classList.add("obstacle");
+
+    let left = window.innerWidth;
+
+    obstacle.style.left = left+"px";
+
+    game.appendChild(obstacle);
+
+    let move = setInterval(()=>{
+
+        if(gameOver){
+            clearInterval(move);
+            return;
+        }
+
+        left -= speed;
+
+        obstacle.style.left = left+"px";
+
+        let playerBottom =
+        parseInt(window.getComputedStyle(player).getPropertyValue("bottom"));
+
+        if(
+            left > 70 &&
+            left < 160 &&
+            playerBottom < 180
+        ){
+
+            gameOver=true;
+
+            gameOverBlock.style.display="block";
+
+            clearInterval(move);
+        }
+
+        if(left < -60){
+
+            obstacle.remove();
+
+            score++;
+
+            scoreElement.innerHTML =
+            "Очки: " + score;
+
+            clearInterval(move);
+        }
+
+    },20);
+
+    let random =
+    Math.random()*1800+1000;
+
+    setTimeout(createObstacle,random);
+}
+
 </script>
-    </body>
-    
-    </html>
+
+</body>
+</html>
+```
