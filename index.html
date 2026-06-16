@@ -920,17 +920,16 @@ window
 .getPropertyValue("bottom")
 );
 
-const c = cactus.getBoundingClientRect();
-const p = player.getBoundingClientRect();
-
 if(
-c.left < p.right &&
-c.right > p.left &&
-c.top < p.bottom &&
-c.bottom > p.top
+left > 70 &&
+left < 170 &&
+playerBottom < 190
 ){
+
 gameLose();
+
 clearInterval(move);
+
 }
 
 if(left < -80){
