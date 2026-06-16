@@ -83,7 +83,7 @@ bottom:120px;
 width:80px;
 height:80px;
 
-background:url(img/2026-06-16\ 134411.png);
+background:url(img/imgplayer.png.png);
 background-size:contain;
 background-repeat:no-repeat;
 background-position:center;
@@ -920,16 +920,17 @@ window
 .getPropertyValue("bottom")
 );
 
+const c = cactus.getBoundingClientRect();
+const p = player.getBoundingClientRect();
+
 if(
-left > 70 &&
-left < 170 &&
-playerBottom < 190
+c.left < p.right &&
+c.right > p.left &&
+c.top < p.bottom &&
+c.bottom > p.top
 ){
-
 gameLose();
-
 clearInterval(move);
-
 }
 
 if(left < -80){
