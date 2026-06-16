@@ -8,291 +8,351 @@
 
 <style>
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
 
 body{
-    background:linear-gradient(180deg,#87ceeb,#dff6ff);
-    overflow:hidden;
+overflow:hidden;
+background:linear-gradient(to bottom,#87CEEB,#E0F7FF);
 }
 
-/* MENU */
-
 #menu{
-    position:absolute;
-    width:100%;
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    gap:20px;
+position:absolute;
+width:100%;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+gap:20px;
 }
 
 #menu h1{
-    font-size:60px;
-    color:#222;
-    text-shadow:3px 3px 10px white;
+font-size:70px;
+color:#222;
+text-shadow:2px 2px 10px white;
 }
 
 #menu p{
-    font-size:20px;
+font-size:22px;
 }
 
 button{
-    padding:15px 40px;
-    border:none;
-    border-radius:15px;
-    font-size:22px;
-    cursor:pointer;
-    background:#4CAF50;
-    color:white;
-    transition:.3s;
+padding:15px 40px;
+font-size:22px;
+border:none;
+border-radius:15px;
+background:#28a745;
+color:white;
+cursor:pointer;
 }
 
 button:hover{
-    transform:scale(1.1);
+transform:scale(1.05);
 }
 
-/* GAME */
-
 #game{
-    display:none;
-    width:100vw;
-    height:100vh;
-    position:relative;
+display:none;
+width:100vw;
+height:100vh;
+position:relative;
+overflow:hidden;
 }
 
 #ground{
-    position:absolute;
-    bottom:0;
-    width:100%;
-    height:120px;
-    background:#5b8c3a;
+position:absolute;
+bottom:0;
+width:100%;
+height:120px;
+background:#73b84d;
+border-top:4px solid #4d7c31;
 }
 
 #player{
-    position:absolute;
-    bottom:120px;
-    left:100px;
-    width:80px;
-    height:80px;
+position:absolute;
+left:120px;
+bottom:120px;
+width:80px;
+height:80px;
 
-    background-image:url(img/WhatsApp\ Image\ 2026-06-16\ at\ 11.13.44.jpeg);
-    background-size:contain;
-    background-repeat:no-repeat;
-    background-position:center;
-}
-
-.obstacle{
-    position:absolute;
-    bottom:120px;
-    width:40px;
-    height:80px;
-    background:#1d8b00;
-    border-radius:8px;
+background:url(img/WhatsApp\ Image\ 2026-06-16\ at\ 11.13.44.jpeg);
+background-size:contain;
+background-repeat:no-repeat;
+background-position:center;
 }
 
 #score{
-    position:absolute;
-    top:20px;
-    left:20px;
-    font-size:30px;
-    font-weight:bold;
+position:absolute;
+left:20px;
+top:20px;
+font-size:28px;
+font-weight:bold;
 }
 
 #speed{
-    position:absolute;
-    top:60px;
-    left:20px;
-    font-size:24px;
+position:absolute;
+left:20px;
+top:60px;
+font-size:22px;
+}
+
+.cactus{
+position:absolute;
+bottom:120px;
+width:60px;
+height:100px;
+}
+
+.body{
+position:absolute;
+left:22px;
+bottom:0;
+width:16px;
+height:100px;
+background:#148214;
+border-radius:10px;
+}
+
+.arm1{
+position:absolute;
+left:0;
+bottom:35px;
+width:22px;
+height:12px;
+background:#148214;
+border-radius:10px;
+}
+
+.arm1::after{
+content:"";
+position:absolute;
+left:0;
+bottom:0;
+width:12px;
+height:35px;
+background:#148214;
+border-radius:10px;
+}
+
+.arm2{
+position:absolute;
+right:0;
+bottom:55px;
+width:22px;
+height:12px;
+background:#148214;
+border-radius:10px;
+}
+
+.arm2::after{
+content:"";
+position:absolute;
+right:0;
+bottom:0;
+width:12px;
+height:30px;
+background:#148214;
+border-radius:10px;
 }
 
 #gameOver{
-    display:none;
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    text-align:center;
+display:none;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
 }
 
 #gameOver h2{
-    font-size:60px;
-    color:red;
-}
-
-#gameOver button{
-    margin-top:20px;
+font-size:60px;
+color:red;
+margin-bottom:20px;
 }
 </style>
 </head>
+
 <body>
 
 <div id="menu">
-    <h1>Muhavgorode</h1>
-    <p>Прыгай через препятствия и набирай очки!</p>
-    <button onclick="startGame()">Играть</button>
+<h1>Muhavgorode</h1>
+<p>Прыгай через кактусы и ставь рекорды</p>
+<button onclick="startGame()">Играть</button>
 </div>
 
 <div id="game">
 
-    <div id="score">Очки: 0</div>
-    <div id="speed">Скорость: 8</div>
+<div id="score">Очки: 0</div>
+<div id="speed">Скорость: 8</div>
 
-    <div id="player"></div>
+<div id="player"></div>
 
-    <div id="ground"></div>
+<div id="ground"></div>
 
-    <div id="gameOver">
-        <h2>ПРОИГРЫШ</h2>
-        <button onclick="location.reload()">Играть снова</button>
-    </div>
+<div id="gameOver">
+<h2>Игра окончена</h2>
+<button onclick="location.reload()">
+Играть снова
+</button>
+</div>
 
 </div>
 
 <script>
 
-let player = document.getElementById("player");
-let game = document.getElementById("game");
-let menu = document.getElementById("menu");
+const menu = document.getElementById("menu");
+const game = document.getElementById("game");
+const player = document.getElementById("player");
 
-let scoreElement = document.getElementById("score");
-let speedElement = document.getElementById("speed");
-let gameOverBlock = document.getElementById("gameOver");
+const scoreText = document.getElementById("score");
+const speedText = document.getElementById("speed");
+const gameOverScreen = document.getElementById("gameOver");
 
-let score = 0;
-let speed = 8;
 let jumping = false;
 let gameOver = false;
 
+let score = 0;
+let speed = 8;
+
 function startGame(){
-    menu.style.display="none";
-    game.style.display="block";
-    createObstacle();
+
+menu.style.display="none";
+game.style.display="block";
+
+setTimeout(()=>{
+createCactus();
+},5000);
+
 }
 
 function jump(){
 
-    if(jumping || gameOver) return;
+if(jumping || gameOver) return;
 
-    jumping = true;
+jumping = true;
 
-    speed = Math.min(speed + 0.4,25);
+speed = Math.min(speed + 0.4,25);
 
-    speedElement.innerHTML =
-    "Скорость: " + speed.toFixed(1);
+speedText.textContent =
+"Скорость: " + speed.toFixed(1);
 
-    let position = 120;
+let position = 120;
 
-    let up = setInterval(()=>{
+let up = setInterval(()=>{
 
-        if(position >= 280){
+if(position >= 280){
 
-            clearInterval(up);
+clearInterval(up);
 
-            let down = setInterval(()=>{
+let down = setInterval(()=>{
 
-                if(position <= 120){
+if(position <= 120){
 
-                    clearInterval(down);
-                    jumping=false;
-                }
+clearInterval(down);
+jumping = false;
+}
 
-                position -= 6;
-                player.style.bottom = position + "px";
+position -= 6;
+player.style.bottom =
+position + "px";
 
-            },15);
+},15);
 
-        }
+}
 
-        position += 6;
-        player.style.bottom = position + "px";
+position += 6;
+player.style.bottom =
+position + "px";
 
-    },15);
+},15);
+
 }
 
 document.addEventListener("keydown",(e)=>{
-    if(e.code==="Space" || e.code==="ArrowUp"){
-        jump();
-    }
+if(e.code==="Space" || e.code==="ArrowUp"){
+jump();
+}
 });
 
 document.addEventListener("touchstart",()=>{
-    jump();
+jump();
 });
 
 document.addEventListener("click",(e)=>{
-
-    if(
-        e.target.tagName !== "BUTTON" &&
-        game.style.display==="block"
-    ){
-        jump();
-    }
+if(e.target.tagName !== "BUTTON"){
+jump();
+}
 });
 
-function createObstacle(){
+function createCactus(){
 
-    if(gameOver) return;
+if(gameOver) return;
 
-    let obstacle = document.createElement("div");
-    obstacle.classList.add("obstacle");
+const cactus =
+document.createElement("div");
 
-    let left = window.innerWidth;
+cactus.className = "cactus";
 
-    obstacle.style.left = left+"px";
+cactus.innerHTML = `
+<div class="body"></div>
+<div class="arm1"></div>
+<div class="arm2"></div>
+`;
 
-    game.appendChild(obstacle);
+game.appendChild(cactus);
 
-    let move = setInterval(()=>{
+let left = window.innerWidth;
 
-        if(gameOver){
-            clearInterval(move);
-            return;
-        }
+cactus.style.left = left + "px";
 
-        left -= speed;
+const move = setInterval(()=>{
 
-        obstacle.style.left = left+"px";
+left -= speed;
 
-        let playerBottom =
-        parseInt(window.getComputedStyle(player).getPropertyValue("bottom"));
+cactus.style.left =
+left + "px";
 
-        if(
-            left > 70 &&
-            left < 160 &&
-            playerBottom < 180
-        ){
+const playerBottom =
+parseInt(
+window.getComputedStyle(player)
+.getPropertyValue("bottom")
+);
 
-            gameOver=true;
+if(
+left > 70 &&
+left < 170 &&
+playerBottom < 190
+){
 
-            gameOverBlock.style.display="block";
+gameOver = true;
 
-            clearInterval(move);
-        }
+gameOverScreen.style.display =
+"block";
 
-        if(left < -60){
+clearInterval(move);
+}
 
-            obstacle.remove();
+if(left < -80){
 
-            score++;
+cactus.remove();
 
-            scoreElement.innerHTML =
-            "Очки: " + score;
+score++;
 
-            clearInterval(move);
-        }
+scoreText.textContent =
+"Очки: " + score;
 
-    },20);
+clearInterval(move);
+}
 
-    let random =
-    Math.random()*1800+1000;
+},20);
 
-    setTimeout(createObstacle,random);
+let random =
+Math.random()*2000 + 1500;
+
+setTimeout(createCactus,random);
 }
 
 </script>
