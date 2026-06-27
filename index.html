@@ -1,966 +1,163 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,initial-scale=1.0">
-
-<title>Hamza Game</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вопрос</title>
 
 <style>
-    *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
 }
 
 body{
-overflow:hidden;
-background:linear-gradient(to bottom,#87CEEB,#E0F7FF);
-transition:1s;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+        radial-gradient(circle at top,#6ea8ff 0%,transparent 40%),
+        radial-gradient(circle at bottom,#ffb3d9 0%,transparent 40%),
+        #f5f5f7;
+    overflow:hidden;
 }
 
-#menu{
-position:absolute;
-width:100%;
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-gap:20px;
-z-index:100;
+.card{
+    width:430px;
+    padding:50px;
+    border-radius:32px;
+    background:rgba(255,255,255,.65);
+    backdrop-filter:blur(30px);
+    -webkit-backdrop-filter:blur(30px);
+    box-shadow:0 30px 80px rgba(0,0,0,.15);
+    text-align:center;
+    animation:show .8s ease;
 }
 
-#menu h1{
-font-size:70px;
-color:#222;
-text-shadow:2px 2px 10px white;
+@keyframes show{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-#menu p{
-font-size:22px;
+h1{
+    font-size:42px;
+    color:#1d1d1f;
+    margin-bottom:15px;
+}
+
+p{
+    color:#6e6e73;
+    margin-bottom:35px;
+    font-size:18px;
+}
+
+.buttons{
+    display:flex;
+    gap:15px;
+    justify-content:center;
 }
 
 button{
-padding:15px 40px;
-font-size:22px;
-border:none;
-border-radius:15px;
-background:#28a745;
-color:white;
-cursor:pointer;
+    flex:1;
+    border:none;
+    border-radius:18px;
+    padding:16px;
+    font-size:20px;
+    cursor:pointer;
+    transition:.25s;
 }
 
-button:hover{
-transform:scale(1.05);
+#yes{
+    background:#0071e3;
+    color:white;
 }
 
-#game{
-display:none;
-width:100vw;
-height:100vh;
-position:relative;
-overflow:hidden;
+#yes:hover{
+    transform:translateY(-3px);
+    box-shadow:0 15px 35px rgba(0,113,227,.35);
 }
 
-#ground{
-position:absolute;
-bottom:0;
-width:100%;
-height:120px;
-background:#73b84d;
-border-top:4px solid #4d7c31;
+#no{
+    background:#ececec;
+    color:#1d1d1f;
 }
 
-#player{
-position:absolute;
-left:120px;
-bottom:120px;
-width:80px;
-height:80px;
-
-background:url(img/imgplayer.png.png);
-background-size:contain;
-background-repeat:no-repeat;
-background-position:center;
+#no:hover{
+    transform:translateY(-3px);
 }
 
-#score{
-position:absolute;
-left:20px;
-top:20px;
-font-size:28px;
-font-weight:bold;
+.instagram{
+    position:fixed;
+    right:30px;
+    bottom:30px;
+    text-decoration:none;
+    color:#1d1d1f;
+    background:rgba(255,255,255,.75);
+    backdrop-filter:blur(20px);
+    padding:14px 22px;
+    border-radius:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    transition:.3s;
 }
 
-#coins{
-position:absolute;
-left:20px;
-top:60px;
-font-size:22px;
-}
-
-#level{
-position:absolute;
-left:20px;
-top:100px;
-font-size:22px;
-}
-
-#best{
-position:absolute;
-left:20px;
-top:140px;
-font-size:22px;
-}
-
-.cloud{
-position:absolute;
-width:120px;
-height:60px;
-background:white;
-border-radius:50px;
-opacity:.8;
-}
-
-.coin{
-position:absolute;
-width:40px;
-height:40px;
-background:gold;
-border:3px solid orange;
-border-radius:50%;
-}
-
-.bird{
-position:absolute;
-font-size:35px;
-}
-
-.cactus{
-position:absolute;
-bottom:120px;
-width:60px;
-height:100px;
-}
-
-.body{
-position:absolute;
-left:22px;
-bottom:0;
-width:16px;
-height:100px;
-background:#148214;
-border-radius:10px;
-}
-
-.arm1{
-position:absolute;
-left:0;
-bottom:35px;
-width:22px;
-height:12px;
-background:#148214;
-border-radius:10px;
-}
-
-.arm1::after{
-content:"";
-position:absolute;
-left:0;
-bottom:0;
-width:12px;
-height:35px;
-background:#148214;
-border-radius:10px;
-}
-
-.arm2{
-position:absolute;
-right:0;
-bottom:55px;
-width:22px;
-height:12px;
-background:#148214;
-border-radius:10px;
-}
-
-.arm2::after{
-content:"";
-position:absolute;
-right:0;
-bottom:0;
-width:12px;
-height:30px;
-background:#148214;
-border-radius:10px;
-}
-
-/* БОЛЬШАЯ ПТИЦА AYAU MAL */
-
-#bannerBird{
-position:absolute;
-top:50px;
-left:-900px;
-display:flex;
-align-items:center;
-z-index:50;
-pointer-events:none;
-animation:birdFloat 2s ease-in-out infinite;
-}
-
-#bigBird{
-font-size:90px;
-}
-
-#banner{
-margin-left:20px;
-background:white;
-padding:15px 60px;
-border-radius:12px;
-border:3px solid #222;
-font-size:32px;
-font-weight:bold;
-color:#222;
-position:relative;
-}
-
-#banner::before{
-content:"";
-position:absolute;
-left:-25px;
-top:50%;
-width:25px;
-height:3px;
-background:#444;
-}
-
-#banner::after{
-content:"";
-position:absolute;
-left:-50px;
-top:50%;
-width:20px;
-height:3px;
-background:#444;
-}
-
-@keyframes birdFloat{
-
-0%{
-transform:translateY(0);
-}
-
-50%{
-transform:translateY(-10px);
-}
-
-100%{
-transform:translateY(0);
-}
-
-}
-
-#gameOver{
-display:none;
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
-text-align:center;
-z-index:300;
-}
-
-#gameOver h2{
-font-size:60px;
-color:red;
-margin-bottom:20px;
+.instagram:hover{
+    transform:scale(1.05);
 }
 </style>
 </head>
 
 <body>
 
-<div id="menu">
+<div class="card">
 
-<h1>Hamza Game</h1>
+<h1>Рома хыяр? 🤔</h1>
 
-<p>
-Прыгай через кактусы,
-собирай монеты
-и ставь рекорды
-</p>
+<p>Выберите один из вариантов</p>
 
-<button onclick="startGame()">
-Играть
-</button>
-
-</div>
-
-<div id="game">
-
-<div id="score">
-Очки: 0
-</div>
-
-<div id="coins">
-Монеты: 0
-</div>
-
-<div id="level">
-Уровень: 1
-</div>
-
-<div id="best">
-Рекорд: 0
-</div>
-
-<div id="player"></div>
-
-<div id="ground"></div>
-
-<div id="gameOver">
-
-<h2>
-Игра окончена
-</h2>
-
-<button onclick="location.reload()">
-Играть снова
-</button>
-
+<div class="buttons" id="buttons">
+    <button id="yes">Да</button>
+    <button id="no">Нет</button>
 </div>
 
 </div>
+
+<a class="instagram"
+href="https://www.instagram.com/rafet_08_/?__pwa=1#"
+target="_blank">
+📷 Instagram
+</a>
 
 <script>
-    const menu =
-document.getElementById("menu");
 
-const game =
-document.getElementById("game");
+const yes=document.getElementById("yes");
+const no=document.getElementById("no");
+const buttons=document.getElementById("buttons");
 
-const player =
-document.getElementById("player");
+no.onclick=()=>{
 
-const scoreText =
-document.getElementById("score");
-
-const coinsText =
-document.getElementById("coins");
-
-const levelText =
-document.getElementById("level");
-
-const bestText =
-document.getElementById("best");
-
-const gameOverScreen =
-document.getElementById("gameOver");
-
-let jumping = false;
-let gameOver = false;
-
-let score = 0;
-let coins = 0;
-let level = 1;
-let speed = 8;
-
-
-// =====================
-// ЗАГРУЗКА СОХРАНЕНИЙ
-// =====================
-
-coins =
-parseInt(
-localStorage.getItem("coins")
-) || 0;
-
-coinsText.textContent =
-"Монеты: " + coins;
-
-bestText.textContent =
-"Рекорд: " +
-(
-localStorage.getItem("best")
-|| 0
-);
-
-
-// =====================
-// СТАРТ ИГРЫ
-// =====================
-
-function startGame(){
-
-menu.style.display =
-"none";
-
-game.style.display =
-"block";
-
-createCloud();
-createCoin();
-createBannerBird();
-
-setTimeout(()=>{
-
-createCactus();
-
-},1500);
-
-setTimeout(()=>{
-
-createBird();
-
-},5000);
+    if(buttons.firstElementChild===yes){
+        buttons.insertBefore(no,yes);
+    }else{
+        buttons.insertBefore(yes,no);
+    }
 
 }
 
+yes.onclick=()=>{
 
-// =====================
-// ПРЫЖОК
-// =====================
-
-function jump(){
-
-if(
-jumping ||
-gameOver
-)return;
-
-jumping = true;
-
-let position = 120;
-
-let up =
-setInterval(()=>{
-
-if(position >= 280){
-
-clearInterval(up);
-
-let down =
-setInterval(()=>{
-
-if(position <= 120){
-
-clearInterval(down);
-
-position = 120;
-
-player.style.bottom =
-position + "px";
-
-jumping = false;
-
-return;
+window.open("https://www.youtube.com/watch?v=xJzVUZ3nX9g","_blank");
 
 }
 
-position -= 7;
-
-player.style.bottom =
-position + "px";
-
-},15);
-
-return;
-
-}
-
-position += 7;
-
-player.style.bottom =
-position + "px";
-
-},15);
-
-}
-
-
-// =====================
-// КНОПКИ
-// =====================
-
-document.addEventListener(
-"keydown",
-(e)=>{
-
-if(
-e.code==="Space" ||
-e.code==="ArrowUp"
-){
-
-jump();
-
-}
-
-}
-);
-
-document.addEventListener(
-"touchstart",
-()=>{
-
-jump();
-
-}
-);
-
-document.addEventListener(
-"click",
-(e)=>{
-
-if(
-e.target.tagName !==
-"BUTTON"
-){
-
-jump();
-
-}
-
-}
-);
-
-
-// =====================
-// УРОВНИ
-// =====================
-
-function updateLevel(){
-
-level =
-Math.floor(score/20)+1;
-
-levelText.textContent =
-"Уровень: " +
-level;
-
-speed =
-8 + level*0.8;
-
-}
-
-
-// =====================
-// СОХРАНЕНИЕ РЕКОРДА
-// =====================
-
-function saveRecord(){
-
-let best =
-parseInt(
-localStorage.getItem("best")
-) || 0;
-
-if(score > best){
-
-localStorage.setItem(
-"best",
-score
-);
-
-}
-
-}
-
-
-// =====================
-// ПРОИГРЫШ
-// =====================
-
-function gameLose(){
-
-gameOver = true;
-
-saveRecord();
-
-gameOverScreen.style.display =
-"block";
-
-}
-// =====================
-// ОБЛАКА
-// =====================
-
-function createCloud(){
-
-if(gameOver) return;
-
-const cloud =
-document.createElement("div");
-
-cloud.className =
-"cloud";
-
-game.appendChild(cloud);
-
-let left =
-window.innerWidth;
-
-let top =
-Math.random()*250;
-
-cloud.style.left =
-left+"px";
-
-cloud.style.top =
-top+"px";
-
-const move =
-setInterval(()=>{
-
-left -= 2;
-
-cloud.style.left =
-left+"px";
-
-if(left < -150){
-
-cloud.remove();
-
-clearInterval(move);
-
-}
-
-},20);
-
-setTimeout(
-createCloud,
-3000
-);
-
-}
-
-
-// =====================
-// МОНЕТЫ
-// =====================
-
-function createCoin(){
-
-if(gameOver) return;
-
-const coin =
-document.createElement("div");
-
-coin.className =
-"coin";
-
-game.appendChild(coin);
-
-let left =
-window.innerWidth;
-
-let bottom =
-Math.random()*220+140;
-
-coin.style.left =
-left+"px";
-
-coin.style.bottom =
-bottom+"px";
-
-const move =
-setInterval(()=>{
-
-left -= speed;
-
-coin.style.left =
-left+"px";
-
-const c =
-coin.getBoundingClientRect();
-
-const p =
-player.getBoundingClientRect();
-
-if(
-c.left < p.right &&
-c.right > p.left &&
-c.top < p.bottom &&
-c.bottom > p.top
-){
-
-coins++;
-
-coinsText.textContent =
-"Монеты: "+coins;
-
-localStorage.setItem(
-"coins",
-coins
-);
-
-coin.remove();
-
-clearInterval(move);
-
-}
-
-if(left < -50){
-
-coin.remove();
-
-clearInterval(move);
-
-}
-
-},20);
-
-setTimeout(
-createCoin,
-2500
-);
-
-}
-
-
-// =====================
-// ПТИЦЫ-ВРАГИ
-// =====================
-
-function createBird(){
-
-if(gameOver) return;
-
-const bird =
-document.createElement("div");
-
-bird.className =
-"bird";
-
-bird.innerHTML =
-"🐦";
-
-game.appendChild(bird);
-
-let left =
-window.innerWidth;
-
-let top =
-Math.random()*200+80;
-
-bird.style.left =
-left+"px";
-
-bird.style.top =
-top+"px";
-
-const move =
-setInterval(()=>{
-
-left -= speed+2;
-
-bird.style.left =
-left+"px";
-
-const b =
-bird.getBoundingClientRect();
-
-const p =
-player.getBoundingClientRect();
-
-if(
-b.left < p.right &&
-b.right > p.left &&
-b.top < p.bottom &&
-b.bottom > p.top
-){
-
-gameLose();
-
-clearInterval(move);
-
-}
-
-if(left < -80){
-
-bird.remove();
-
-clearInterval(move);
-
-}
-
-},20);
-
-setTimeout(
-createBird,
-Math.random()*5000+4000
-);
-
-}
-
-
-// =====================
-// БОЛЬШАЯ ПТИЦА AYAU MAL
-// =====================
-
-function createBannerBird(){
-
-if(gameOver) return;
-
-const bird =
-document.createElement("div");
-
-bird.id =
-"bannerBird";
-
-bird.innerHTML = `
-<div id="bigBird">🦅</div>
-<div id="banner">
-Ayau Mal
-</div>
-`;
-
-game.appendChild(bird);
-
-let left = -900;
-
-const move =
-setInterval(()=>{
-
-left += 3;
-
-bird.style.left =
-left+"px";
-
-if(
-left >
-window.innerWidth+400
-){
-
-bird.remove();
-
-clearInterval(move);
-
-}
-
-},20);
-
-setTimeout(
-createBannerBird,
-20000
-);
-
-}
-
-
-// =====================
-// ДЕНЬ / НОЧЬ
-// =====================
-
-let night = false;
-
-function toggleDayNight(){
-
-night = !night;
-
-if(night){
-
-document.body.style.background =
-"linear-gradient(to bottom,#001848,#0b2d5f)";
-
-}else{
-
-document.body.style.background =
-"linear-gradient(to bottom,#87CEEB,#E0F7FF)";
-
-}
-
-}
-
-
-// =====================
-// КАКТУСЫ
-// =====================
-
-function createCactus(){
-
-if(gameOver) return;
-
-const cactus =
-document.createElement("div");
-
-cactus.className =
-"cactus";
-
-cactus.innerHTML = `
-<div class="body"></div>
-<div class="arm1"></div>
-<div class="arm2"></div>
-`;
-
-game.appendChild(cactus);
-
-let left =
-window.innerWidth;
-
-cactus.style.left =
-left+"px";
-
-const move =
-setInterval(()=>{
-
-left -= speed;
-
-cactus.style.left =
-left+"px";
-
-const playerBottom =
-parseInt(
-window
-.getComputedStyle(player)
-.getPropertyValue("bottom")
-);
-
-if(
-left > 70 &&
-left < 170 &&
-playerBottom < 190
-){
-
-gameLose();
-
-clearInterval(move);
-
-}
-
-if(left < -80){
-
-cactus.remove();
-
-score++;
-
-scoreText.textContent =
-"Очки: "+score;
-
-updateLevel();
-
-if(score % 20 === 0){
-
-toggleDayNight();
-
-}
-
-clearInterval(move);
-
-}
-
-},20);
-
-setTimeout(
-createCactus,
-Math.random()*2000+1200
-);
-
-}
 </script>
 
 </body>
