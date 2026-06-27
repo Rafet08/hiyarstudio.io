@@ -2,163 +2,376 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Вопрос</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+<title>РОМА МАЛ GAME</title>
 
 <style>
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
 }
 
 body{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:
-        radial-gradient(circle at top,#6ea8ff 0%,transparent 40%),
-        radial-gradient(circle at bottom,#ffb3d9 0%,transparent 40%),
-        #f5f5f7;
-    overflow:hidden;
+background:linear-gradient(#87CEEB,#ffffff);
+overflow:hidden;
+touch-action:manipulation;
+user-select:none;
 }
 
-.card{
-    width:430px;
-    padding:50px;
-    border-radius:32px;
-    background:rgba(255,255,255,.65);
-    backdrop-filter:blur(30px);
-    -webkit-backdrop-filter:blur(30px);
-    box-shadow:0 30px 80px rgba(0,0,0,.15);
-    text-align:center;
-    animation:show .8s ease;
+.marquee{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:50px;
+background:#ff0000;
+color:white;
+font-size:28px;
+font-weight:bold;
+line-height:50px;
+overflow:hidden;
+z-index:999;
 }
 
-@keyframes show{
-    from{
-        opacity:0;
-        transform:translateY(30px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+.marquee span{
+display:inline-block;
+white-space:nowrap;
+padding-left:100%;
+animation:move 8s linear infinite;
 }
 
-h1{
-    font-size:42px;
-    color:#1d1d1f;
-    margin-bottom:15px;
+@keyframes move{
+
+0%{
+transform:translateX(0);
 }
 
-p{
-    color:#6e6e73;
-    margin-bottom:35px;
-    font-size:18px;
+100%{
+transform:translateX(-100%);
 }
 
-.buttons{
-    display:flex;
-    gap:15px;
-    justify-content:center;
+}
+
+#game{
+position:relative;
+margin:70px auto;
+width:95%;
+max-width:900px;
+height:320px;
+background:white;
+border:4px solid #222;
+border-radius:15px;
+overflow:hidden;
+}
+
+#ground{
+position:absolute;
+bottom:0;
+width:100%;
+height:60px;
+background:#C79C63;
+}
+
+#player{
+position:absolute;
+left:80px;
+bottom:60px;
+width:80px;
+height:80px;
+background:url(img/Снимок\ экрана\ 2026-06-27\ 135726.png) center center/contain no-repeat;
+}
+
+.cactus{
+position:absolute;
+bottom:60px;
+width:40px;
+height:60px;
+background:#0a8f08;
+border-radius:6px;
+}
+
+#score{
+position:absolute;
+top:15px;
+left:15px;
+font-size:28px;
+font-weight:bold;
+}
+
+#gameOver{
+display:none;
+position:absolute;
+left:50%;
+top:50%;
+transform:translate(-50%,-50%);
+background:rgba(0,0,0,.75);
+padding:30px;
+border-radius:15px;
+text-align:center;
+color:white;
 }
 
 button{
-    flex:1;
-    border:none;
-    border-radius:18px;
-    padding:16px;
-    font-size:20px;
-    cursor:pointer;
-    transition:.25s;
+margin-top:15px;
+padding:12px 24px;
+font-size:20px;
+border:none;
+border-radius:10px;
+background:#2196f3;
+color:white;
+cursor:pointer;
 }
 
-#yes{
-    background:#0071e3;
-    color:white;
+@media(max-width:700px){
+
+#game{
+
+height:260px;
+
 }
 
-#yes:hover{
-    transform:translateY(-3px);
-    box-shadow:0 15px 35px rgba(0,113,227,.35);
+#player{
+
+width:65px;
+height:65px;
+left:30px;
+
 }
 
-#no{
-    background:#ececec;
-    color:#1d1d1f;
+.cactus{
+
+width:30px;
+
 }
 
-#no:hover{
-    transform:translateY(-3px);
+#score{
+
+font-size:22px;
+
 }
 
-.instagram{
-    position:fixed;
-    right:30px;
-    bottom:30px;
-    text-decoration:none;
-    color:#1d1d1f;
-    background:rgba(255,255,255,.75);
-    backdrop-filter:blur(20px);
-    padding:14px 22px;
-    border-radius:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
-    transition:.3s;
 }
 
-.instagram:hover{
-    transform:scale(1.05);
-}
 </style>
 </head>
 
 <body>
 
-<div class="card">
-
-<h1>Рома хыяр? 🤔</h1>
-
-<p>Выберите один из вариантов</p>
-
-<div class="buttons" id="buttons">
-    <button id="yes">Да</button>
-    <button id="no">Нет</button>
+<div class="marquee">
+<span>
+РОМА МАЛ • РОМА МАЛ • РОМА МАЛ • РОМА МАЛ • РОМА МАЛ •
+</span>
 </div>
 
+<div id="game">
+
+<div id="score">0</div>
+
+<div id="player"></div>
+
+<div id="ground"></div>
+
+<div id="gameOver">
+
+<h1>Игра окончена</h1>
+
+<button onclick="location.reload()">
+Играть снова
+</button>
+
 </div>
-
-<a class="instagram"
-href="https://www.instagram.com/rafet_08_/?__pwa=1#"
-target="_blank">
-📷 Instagram
-</a>
-
 <script>
 
-const yes=document.getElementById("yes");
-const no=document.getElementById("no");
-const buttons=document.getElementById("buttons");
+const game = document.getElementById("game");
+const player = document.getElementById("player");
+const score = document.getElementById("score");
+const gameOver = document.getElementById("gameOver");
 
-no.onclick=()=>{
+let jump = false;
+let playerY = 0;
+let velocity = 0;
+const gravity = 0.7;
 
-    if(buttons.firstElementChild===yes){
-        buttons.insertBefore(no,yes);
-    }else{
-        buttons.insertBefore(yes,no);
+let points = 0;
+let speed = 8;
+let playing = true;
+
+// Прыжок
+function doJump(){
+
+    if(jump || !playing) return;
+
+    jump = true;
+    velocity = 19; // высокий прыжок
+
+}
+
+// Клавиатура
+document.addEventListener("keydown",(e)=>{
+
+    if(e.code==="Space" || e.code==="ArrowUp"){
+
+        e.preventDefault();
+        doJump();
+
     }
 
+});
+
+// Телефон — прыжок по касанию
+game.addEventListener("touchstart",(e)=>{
+
+    e.preventDefault();
+    doJump();
+
+});
+
+// Клик мышью
+game.addEventListener("mousedown",doJump);
+
+// Обновление игрока
+function updatePlayer(){
+
+    if(jump){
+
+        velocity -= gravity;
+        playerY += velocity;
+
+        if(playerY <= 0){
+
+            playerY = 0;
+            jump = false;
+
+        }
+
+    }
+
+    player.style.bottom = (60 + playerY) + "px";
+
 }
 
-yes.onclick=()=>{
+// Главный цикл игры
+function animate(){
 
-window.open("https://www.youtube.com/watch?v=xJzVUZ3nX9g","_blank");
+    updatePlayer();
+
+    requestAnimationFrame(animate);
 
 }
+
+animate();
+// Создание кактуса
+function createCactus(){
+
+    if(!playing) return;
+
+    const cactus = document.createElement("div");
+    cactus.className = "cactus";
+
+    // Небольшая случайная высота
+    cactus.style.height = (45 + Math.random() * 20) + "px";
+
+    game.appendChild(cactus);
+
+    let x = game.clientWidth + 50;
+    cactus.style.left = x + "px";
+
+    const move = setInterval(()=>{
+
+        if(!playing){
+            clearInterval(move);
+            return;
+        }
+
+        x -= speed;
+        cactus.style.left = x + "px";
+
+        const p = player.getBoundingClientRect();
+        const c = cactus.getBoundingClientRect();
+
+        // Столкновение
+        if(
+            p.right > c.left + 8 &&
+            p.left < c.right - 8 &&
+            p.bottom > c.top + 8 &&
+            p.top < c.bottom - 8
+        ){
+
+            playing = false;
+            gameOver.style.display = "block";
+            clearInterval(move);
+            return;
+
+        }
+
+        // Кактус ушёл за экран
+        if(x < -60){
+
+            clearInterval(move);
+            cactus.remove();
+
+            points++;
+            score.textContent = points;
+
+            // Каждые 5 очков немного ускоряем игру
+            if(points % 5 === 0){
+                speed += 0.5;
+            }
+
+        }
+
+    },20);
+
+}
+
+// Новый кактус каждые 2.2 секунды
+setInterval(()=>{
+
+    if(playing){
+        createCactus();
+    }
+
+},2200);
+function restartGame(){
+
+    location.reload();
+
+}
+
+// Если нажата кнопка "Играть снова"
+const restartButton = document.querySelector("#gameOver button");
+
+if(restartButton){
+
+    restartButton.addEventListener("click",restartGame);
+
+}
+
+// Чтобы страница не прокручивалась на телефоне
+document.addEventListener("touchmove",function(e){
+
+    e.preventDefault();
+
+},{passive:false});
+
+// Запускаем первый кактус немного позже
+setTimeout(function(){
+
+    if(playing){
+
+        createCactus();
+
+    }
+
+},1500);
 
 </script>
+
+</div>
 
 </body>
 </html>
