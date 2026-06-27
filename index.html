@@ -2,9 +2,11 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>РОМА МАЛ GAME</title>
+<title>Для тебя ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
@@ -12,366 +14,463 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial,sans-serif;
+font-family:'Poppins',sans-serif;
 }
 
 body{
-background:linear-gradient(#87CEEB,#ffffff);
+
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
 overflow:hidden;
-touch-action:manipulation;
-user-select:none;
+
+background:linear-gradient(-45deg,#ff9ecf,#ffd6ec,#d8c2ff,#9fdcff);
+background-size:400% 400%;
+animation:bg 12s infinite;
+
 }
 
-.marquee{
+@keyframes bg{
+
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+
+}
+
+.hearts{
+
 position:fixed;
-top:0;
 left:0;
+top:0;
 width:100%;
-height:50px;
-background:#ff0000;
-color:white;
-font-size:28px;
-font-weight:bold;
-line-height:50px;
+height:100%;
+pointer-events:none;
 overflow:hidden;
-z-index:999;
+
 }
 
-.marquee span{
-display:inline-block;
-white-space:nowrap;
-padding-left:100%;
-animation:move 8s linear infinite;
+.hearts span{
+
+position:absolute;
+bottom:-50px;
+animation:fly linear infinite;
+opacity:.8;
+
 }
 
-@keyframes move{
+@keyframes fly{
 
 0%{
-transform:translateX(0);
+transform:translateY(0) rotate(0deg);
+opacity:0;
+}
+
+20%{
+opacity:1;
 }
 
 100%{
-transform:translateX(-100%);
+transform:translateY(-120vh) rotate(360deg);
+opacity:0;
 }
 
 }
 
-#game{
-position:relative;
-margin:70px auto;
-width:95%;
-max-width:900px;
-height:320px;
-background:white;
-border:4px solid #222;
-border-radius:15px;
-overflow:hidden;
-}
+.card{
 
-#ground{
-position:absolute;
-bottom:0;
-width:100%;
-height:60px;
-background:#C79C63;
-}
+width:92%;
+max-width:700px;
 
-#player{
-position:absolute;
-left:80px;
-bottom:60px;
-width:80px;
-height:80px;
-background:url(img/Снимок\ экрана\ 2026-06-27\ 135726.png) center center/contain no-repeat;
-}
+background:rgba(255,255,255,.18);
 
-.cactus{
-position:absolute;
-bottom:60px;
-width:40px;
-height:60px;
-background:#0a8f08;
-border-radius:6px;
-}
+backdrop-filter:blur(20px);
 
-#score{
-position:absolute;
-top:15px;
-left:15px;
-font-size:28px;
-font-weight:bold;
-}
+border:1px solid rgba(255,255,255,.3);
 
-#gameOver{
-display:none;
-position:absolute;
-left:50%;
-top:50%;
-transform:translate(-50%,-50%);
-background:rgba(0,0,0,.75);
-padding:30px;
-border-radius:15px;
+border-radius:35px;
+
+padding:45px;
+
+box-shadow:0 25px 60px rgba(0,0,0,.2);
+
 text-align:center;
+
+z-index:5;
+
+}
+
+.logo{
+
+font-size:60px;
+
+margin-bottom:10px;
+
+animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+50%{
+transform:scale(1.15);
+}
+
+}
+
+h1{
+
 color:white;
+font-size:38px;
+
+margin-bottom:15px;
+
+}
+
+#question{
+
+color:white;
+font-size:28px;
+
+font-weight:600;
+
+margin:40px 0;
+
+min-height:90px;
+
+}
+
+.buttons{
+
+display:flex;
+
+justify-content:center;
+
+gap:25px;
+
+margin-top:10px;
+
 }
 
 button{
-margin-top:15px;
-padding:12px 24px;
-font-size:20px;
+
 border:none;
-border-radius:10px;
-background:#2196f3;
-color:white;
+
+padding:17px 42px;
+
+font-size:20px;
+
+font-weight:bold;
+
+border-radius:50px;
+
 cursor:pointer;
+
+transition:.3s;
+
+}
+
+#yes{
+
+background:#ff2d55;
+
+color:white;
+
+box-shadow:0 12px 30px rgba(255,45,85,.4);
+
+}
+
+#yes:hover{
+
+transform:scale(1.08);
+
+}
+
+#no{
+
+background:white;
+
+color:#444;
+
+}
+
+#result{
+
+margin-top:35px;
+
+font-size:28px;
+
+color:white;
+
+font-weight:bold;
+
+}
+
+.roma-photo{
+
+width:260px;
+
+max-width:90%;
+
+border-radius:25px;
+
+margin-top:25px;
+
+box-shadow:0 20px 40px rgba(0,0,0,.35);
+
+animation:showPhoto .8s;
+
+}
+
+@keyframes showPhoto{
+
+0%{
+
+opacity:0;
+
+transform:scale(.5);
+
+}
+
+100%{
+
+opacity:1;
+
+transform:scale(1);
+
+}
+
+}
+
+.creator{
+
+position:fixed;
+
+right:20px;
+
+bottom:20px;
+
+padding:12px 20px;
+
+border-radius:30px;
+
+background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4);
+
+color:white;
+
+font-weight:bold;
+
+text-decoration:none;
+
+box-shadow:0 10px 25px rgba(0,0,0,.3);
+
+transition:.3s;
+
+}
+
+.creator:hover{
+
+transform:scale(1.1);
+
 }
 
 @media(max-width:700px){
 
-#game{
+.card{
 
-height:260px;
-
-}
-
-#player{
-
-width:65px;
-height:65px;
-left:30px;
+padding:25px;
 
 }
 
-.cactus{
+h1{
 
-width:30px;
+font-size:28px;
 
 }
 
-#score{
+#question{
 
 font-size:22px;
+
+}
+
+button{
+
+font-size:18px;
+
+padding:15px 25px;
 
 }
 
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div class="marquee">
-<span>
-РОМА МАЛ • РОМА МАЛ • РОМА МАЛ • РОМА МАЛ • РОМА МАЛ •
-</span>
-</div>
+<div class="hearts" id="hearts"></div>
 
-<div id="game">
+<div class="card">
 
-<div id="score">0</div>
+<div class="logo">❤️</div>
 
-<div id="player"></div>
+<h1>Вопросы про Рому</h1>
 
-<div id="ground"></div>
+<div id="question">
 
-<div id="gameOver">
-
-<h1>Игра окончена</h1>
-
-<button onclick="location.reload()">
-Играть снова
-</button>
+Тебе нравится Рома?
 
 </div>
+
+<div class="buttons">
+
+<button id="yes">Да ❤️</button>
+
+<button id="no">Нет 🙈</button>
+
+</div>
+
+<div id="result"></div>
+
+</div>
+
+<a class="creator"
+href="https://www.instagram.com/rafet_08_/?__pwa=1#
+target="_blank">
+
+📷 Создатель
+
+</a>
+
 <script>
+    const questions = [
+"Тебе нравится Рома? ❤️",
+"Рома красивый? 😍",
+"Рома милый? 🥰",
+"Рома смешной? 😂",
+"Хотела бы пойти с Ромой на свидание? 🌹",
+"Ты часто думаешь о Роме? 💭",
+"Рома заслуживает объятий? 🤗",
+"Рома самый лучший? 💖",
+"Любишь Рому? ❤️"
+];
 
-const game = document.getElementById("game");
-const player = document.getElementById("player");
-const score = document.getElementById("score");
-const gameOver = document.getElementById("gameOver");
+let current = 0;
 
-let jump = false;
-let playerY = 0;
-let velocity = 0;
-const gravity = 0.7;
+const question = document.getElementById("question");
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const result = document.getElementById("result");
+const buttons = document.querySelector(".buttons");
 
-let points = 0;
-let speed = 8;
-let playing = true;
+let swap = false;
 
-// Прыжок
-function doJump(){
+yes.onclick = function(){
 
-    if(jump || !playing) return;
+current++;
 
-    jump = true;
-    velocity = 19; // высокий прыжок
+if(current < questions.length){
 
-}
+question.innerHTML = questions[current];
 
-// Клавиатура
-document.addEventListener("keydown",(e)=>{
+}else{
 
-    if(e.code==="Space" || e.code==="ArrowUp"){
+buttons.style.display="none";
 
-        e.preventDefault();
-        doJump();
+question.innerHTML="🎉 Поздравляем!";
 
-    }
+result.innerHTML=`
 
-});
+<h2>Теперь официально считается, что ты любишь Рому ❤️</h2>
 
-// Телефон — прыжок по касанию
-game.addEventListener("touchstart",(e)=>{
+<img src="img/imgplayer.png.png.png" class="roma-photo">
 
-    e.preventDefault();
-    doJump();
+<p style="margin-top:20px;font-size:24px;">
+🥰 Это Рома 🥰
+</p>
 
-});
+`;
 
-// Клик мышью
-game.addEventListener("mousedown",doJump);
-
-// Обновление игрока
-function updatePlayer(){
-
-    if(jump){
-
-        velocity -= gravity;
-        playerY += velocity;
-
-        if(playerY <= 0){
-
-            playerY = 0;
-            jump = false;
-
-        }
-
-    }
-
-    player.style.bottom = (60 + playerY) + "px";
+confetti();
 
 }
 
-// Главный цикл игры
-function animate(){
+};
 
-    updatePlayer();
+no.onclick = function(){
 
-    requestAnimationFrame(animate);
+if(!swap){
 
-}
+buttons.appendChild(yes);
+buttons.appendChild(no);
 
-animate();
-// Создание кактуса
-function createCactus(){
+}else{
 
-    if(!playing) return;
-
-    const cactus = document.createElement("div");
-    cactus.className = "cactus";
-
-    // Небольшая случайная высота
-    cactus.style.height = (45 + Math.random() * 20) + "px";
-
-    game.appendChild(cactus);
-
-    let x = game.clientWidth + 50;
-    cactus.style.left = x + "px";
-
-    const move = setInterval(()=>{
-
-        if(!playing){
-            clearInterval(move);
-            return;
-        }
-
-        x -= speed;
-        cactus.style.left = x + "px";
-
-        const p = player.getBoundingClientRect();
-        const c = cactus.getBoundingClientRect();
-
-        // Столкновение
-        if(
-            p.right > c.left + 8 &&
-            p.left < c.right - 8 &&
-            p.bottom > c.top + 8 &&
-            p.top < c.bottom - 8
-        ){
-
-            playing = false;
-            gameOver.style.display = "block";
-            clearInterval(move);
-            return;
-
-        }
-
-        // Кактус ушёл за экран
-        if(x < -60){
-
-            clearInterval(move);
-            cactus.remove();
-
-            points++;
-            score.textContent = points;
-
-            // Каждые 5 очков немного ускоряем игру
-            if(points % 5 === 0){
-                speed += 0.5;
-            }
-
-        }
-
-    },20);
+buttons.appendChild(no);
+buttons.appendChild(yes);
 
 }
 
-// Новый кактус каждые 2.2 секунды
-setInterval(()=>{
+swap=!swap;
 
-    if(playing){
-        createCactus();
-    }
+};
 
-},2200);
-function restartGame(){
+const hearts=document.getElementById("hearts");
 
-    location.reload();
+for(let i=0;i<40;i++){
+
+const heart=document.createElement("span");
+
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"%";
+
+heart.style.fontSize=(18+Math.random()*25)+"px";
+
+heart.style.animationDuration=(5+Math.random()*6)+"s";
+
+heart.style.animationDelay=Math.random()*5+"s";
+
+hearts.appendChild(heart);
 
 }
 
-// Если нажата кнопка "Играть снова"
-const restartButton = document.querySelector("#gameOver button");
+function confetti(){
 
-if(restartButton){
+for(let i=0;i<120;i++){
 
-    restartButton.addEventListener("click",restartGame);
+const e=document.createElement("span");
+
+e.innerHTML=["❤️","💖","✨","🎉"][Math.floor(Math.random()*4)];
+
+e.style.position="fixed";
+e.style.left=Math.random()*100+"vw";
+e.style.top="-30px";
+e.style.fontSize=(18+Math.random()*20)+"px";
+e.style.transition="4s linear";
+
+document.body.appendChild(e);
+
+setTimeout(()=>{
+
+e.style.transform="translateY(120vh) rotate(720deg)";
+
+},30);
+
+setTimeout(()=>{
+
+e.remove();
+
+},4200);
 
 }
 
-// Чтобы страница не прокручивалась на телефоне
-document.addEventListener("touchmove",function(e){
-
-    e.preventDefault();
-
-},{passive:false});
-
-// Запускаем первый кактус немного позже
-setTimeout(function(){
-
-    if(playing){
-
-        createCactus();
-
-    }
-
-},1500);
+}
 
 </script>
-
-</div>
 
 </body>
 </html>
