@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Для тебя ❤️</title>
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Rafet Player</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 
@@ -14,294 +17,272 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+font-family:Poppins,sans-serif;
 }
 
 body{
 
-display:flex;
-justify-content:center;
-align-items:center;
+background:#0d1117;
+
 height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+color:white;
+
 overflow:hidden;
 
-background:linear-gradient(-45deg,#ff9ecf,#ffd6ec,#d8c2ff,#9fdcff);
-background-size:400% 400%;
-animation:bg 12s infinite;
+}
+
+.player{
+
+width:430px;
+
+background:#161b22;
+
+border-radius:25px;
+
+padding:25px;
+
+box-shadow:0 0 50px rgba(0,0,0,.5);
 
 }
 
-@keyframes bg{
+.cover{
 
-0%{background-position:0% 50%;}
-50%{background-position:100% 50%;}
-100%{background-position:0% 50%;}
+width:260px;
+
+height:260px;
+
+margin:auto;
+
+border-radius:20px;
+
+overflow:hidden;
+
+box-shadow:0 0 30px #000;
 
 }
 
-.hearts{
+.cover img{
 
-position:fixed;
-left:0;
-top:0;
 width:100%;
+
 height:100%;
-pointer-events:none;
-overflow:hidden;
+
+object-fit:cover;
+
+transition:.5s;
 
 }
 
-.hearts span{
+.info{
 
-position:absolute;
-bottom:-50px;
-animation:fly linear infinite;
+text-align:center;
+
+margin-top:20px;
+
+}
+
+.info h2{
+
+font-size:28px;
+
+}
+
+.info h3{
+
+font-weight:300;
+
+opacity:.7;
+
+margin-top:5px;
+
+}
+
+.progress{
+
+margin-top:25px;
+
+}
+
+#progress{
+
+width:100%;
+
+cursor:pointer;
+
+}
+
+.time{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-top:5px;
+
+font-size:13px;
+
 opacity:.8;
 
 }
 
-@keyframes fly{
-
-0%{
-transform:translateY(0) rotate(0deg);
-opacity:0;
-}
-
-20%{
-opacity:1;
-}
-
-100%{
-transform:translateY(-120vh) rotate(360deg);
-opacity:0;
-}
-
-}
-
-.card{
-
-width:92%;
-max-width:700px;
-
-background:rgba(255,255,255,.18);
-
-backdrop-filter:blur(20px);
-
-border:1px solid rgba(255,255,255,.3);
-
-border-radius:35px;
-
-padding:45px;
-
-box-shadow:0 25px 60px rgba(0,0,0,.2);
-
-text-align:center;
-
-z-index:5;
-
-}
-
-.logo{
-
-font-size:60px;
-
-margin-bottom:10px;
-
-animation:pulse 2s infinite;
-
-}
-
-@keyframes pulse{
-
-50%{
-transform:scale(1.15);
-}
-
-}
-
-h1{
-
-color:white;
-font-size:38px;
-
-margin-bottom:15px;
-
-}
-
-#question{
-
-color:white;
-font-size:28px;
-
-font-weight:600;
-
-margin:40px 0;
-
-min-height:90px;
-
-}
-
-.buttons{
+.controls{
 
 display:flex;
 
 justify-content:center;
 
-gap:25px;
-
-margin-top:10px;
-
-}
-
-button{
-
-border:none;
-
-padding:17px 42px;
-
-font-size:20px;
-
-font-weight:bold;
-
-border-radius:50px;
-
-cursor:pointer;
-
-transition:.3s;
-
-}
-
-#yes{
-
-background:#ff2d55;
-
-color:white;
-
-box-shadow:0 12px 30px rgba(255,45,85,.4);
-
-}
-
-#yes:hover{
-
-transform:scale(1.08);
-
-}
-
-#no{
-
-background:white;
-
-color:#444;
-
-}
-
-#result{
-
-margin-top:35px;
-
-font-size:28px;
-
-color:white;
-
-font-weight:bold;
-
-}
-
-.roma-photo{
-
-width:260px;
-
-max-width:90%;
-
-border-radius:25px;
+gap:15px;
 
 margin-top:25px;
 
-box-shadow:0 20px 40px rgba(0,0,0,.35);
-
-animation:showPhoto .8s;
-
 }
 
-@keyframes showPhoto{
+.controls button{
 
-0%{
+width:60px;
 
-opacity:0;
+height:60px;
 
-transform:scale(.5);
+border:none;
 
-}
+border-radius:50%;
 
-100%{
+cursor:pointer;
 
-opacity:1;
+font-size:23px;
 
-transform:scale(1);
-
-}
-
-}
-
-.creator{
-
-position:fixed;
-
-right:20px;
-
-bottom:20px;
-
-padding:12px 20px;
-
-border-radius:30px;
-
-background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4);
+background:#1db954;
 
 color:white;
 
-font-weight:bold;
-
-text-decoration:none;
-
-box-shadow:0 10px 25px rgba(0,0,0,.3);
-
-transition:.3s;
+transition:.25s;
 
 }
 
-.creator:hover{
+.controls button:hover{
 
 transform:scale(1.1);
 
 }
 
-@media(max-width:700px){
+.options{
 
-.card{
+display:flex;
 
-padding:25px;
+justify-content:space-between;
 
-}
-
-h1{
-
-font-size:28px;
+margin-top:20px;
 
 }
 
-#question{
+.options button{
 
-font-size:22px;
+width:48%;
+
+padding:12px;
+
+background:#222;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+color:white;
+
+font-size:16px;
 
 }
 
-button{
+.options button:hover{
 
-font-size:18px;
-
-padding:15px 25px;
+background:#333;
 
 }
+
+.volume{
+
+margin-top:20px;
+
+}
+
+.volume input{
+
+width:100%;
+
+}
+
+.playlist{
+
+margin-top:25px;
+
+max-height:230px;
+
+overflow:auto;
+
+}
+
+.song{
+
+padding:12px;
+
+margin-bottom:8px;
+
+background:#222;
+
+border-radius:10px;
+
+cursor:pointer;
+
+transition:.2s;
+
+}
+
+.song:hover{
+
+background:#333;
+
+}
+
+.active{
+
+background:#1db954!important;
+
+}
+
+canvas{
+
+margin-top:20px;
+
+width:100%;
+
+height:80px;
+
+border-radius:12px;
+
+background:#101010;
+
+}
+
+::-webkit-scrollbar{
+
+width:6px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#1db954;
+
+border-radius:10px;
 
 }
 
@@ -311,164 +292,613 @@ padding:15px 25px;
 
 <body>
 
-<div class="hearts" id="hearts"></div>
+<div class="player">
 
-<div class="card">
+<div class="cover">
 
-<div class="logo">❤️</div>
-
-<h1>Вопросы про Рому</h1>
-
-<div id="question">
-
-Тебе нравится Рома?
+<img id="cover">
 
 </div>
 
-<div class="buttons">
+<div class="info">
 
-<button id="yes">Да ❤️</button>
+<h2 id="title"></h2>
 
-<button id="no">Нет 🙈</button>
-
-</div>
-
-<div id="result"></div>
+<h3 id="artist"></h3>
 
 </div>
 
-<a class="creator"
-href="https://www.instagram.com/rafet_08_/?__pwa=1#
-target="_blank">
+<div class="progress">
 
-📷 Создатель
+<input
+id="progress"
+type="range"
+min="0"
+max="100"
+value="0">
 
-</a>
+<div class="time">
+
+<span id="current">
+
+0:00
+
+</span>
+
+<span id="duration">
+
+0:00
+
+</span>
+
+</div>
+
+</div>
+
+<div class="controls">
+
+<button id="prev">
+
+⏮
+
+</button>
+
+<button id="play">
+
+▶
+
+</button>
+
+<button id="next">
+
+⏭
+
+</button>
+
+</div>
+
+<div class="options">
+
+<button id="shuffle">
+
+🔀 Shuffle
+
+</button>
+
+<button id="repeat">
+
+🔁 Repeat
+
+</button>
+
+</div>
+
+<div class="volume">
+
+<input
+id="volume"
+type="range"
+min="0"
+max="1"
+step="0.01"
+value="1">
+
+</div>
+
+<canvas id="visualizer"></canvas>
+
+<div
+class="playlist"
+id="playlist">
+
+</div>
+
+</div>
+
+<audio id="audio"></audio>
 
 <script>
-    const questions = [
-"Тебе нравится Рома? ❤️",
-"Рома красивый? 😍",
-"Рома милый? 🥰",
-"Рома смешной? 😂",
-"Хотела бы пойти с Ромой на свидание? 🌹",
-"Ты часто думаешь о Роме? 💭",
-"Рома заслуживает объятий? 🤗",
-"Рома самый лучший? 💖",
-"Любишь Рому? ❤️"
+
+const songs=[
+    
+
+{
+    title: "Believer",
+    artist: "Imagine Dragons",
+    file: "music/Believer.mp3",
+    cover: "Covers/Believer.jpg"
+},
+
+{
+    title: "Faded",
+    artist: "Alan Walker",
+    file: "music/Faded.mp3",
+    cover: "Covers/Faded.jpg"
+},
+
+{
+    title: "Unity",
+    artist: "TheFatRat",
+    file: "music/Unity.mp3",
+    cover: "Covers/Unity.jpg"
+},
+
+{
+    title: "Numb",
+    artist: "Linkin Park",
+    file: "music/Numb.mp3.mp3",
+    cover: "Covers/Numb.jpg.jpeg"
+}
+
 ];
 
-let current = 0;
 
-const question = document.getElementById("question");
-const yes = document.getElementById("yes");
-const no = document.getElementById("no");
-const result = document.getElementById("result");
-const buttons = document.querySelector(".buttons");
 
-let swap = false;
 
-yes.onclick = function(){
 
-current++;
+const audio=document.getElementById("audio");
 
-if(current < questions.length){
+const cover=document.getElementById("cover");
 
-question.innerHTML = questions[current];
+const title=document.getElementById("title");
 
-}else{
+const artist=document.getElementById("artist");
 
-buttons.style.display="none";
+const play=document.getElementById("play");
 
-question.innerHTML="🎉 Поздравляем!";
+const next=document.getElementById("next");
 
-result.innerHTML=`
+const prev=document.getElementById("prev");
 
-<h2>Теперь официально считается, что ты любишь Рому ❤️</h2>
+const playlist=document.getElementById("playlist");
 
-<img src="img/imgplayer.png.png.png" class="roma-photo">
+const progress=document.getElementById("progress");
 
-<p style="margin-top:20px;font-size:24px;">
-🥰 Это Рома 🥰
-</p>
+const volume=document.getElementById("volume");
 
-`;
+const current=document.getElementById("current");
 
-confetti();
+const duration=document.getElementById("duration");
+
+const shuffle=document.getElementById("shuffle");
+
+const repeat=document.getElementById("repeat");
+
+const canvas=document.getElementById("visualizer");
+
+const ctx=canvas.getContext("2d");
+
+let index=0;
+
+let random=false;
+
+let loop=false;
+
+let playing=false;
+// ===============================
+// Загрузка трека
+// ===============================
+
+function loadSong(i){
+
+    index=i;
+
+    const song=songs[index];
+
+    audio.src=song.file;
+
+    cover.src=song.cover;
+
+    title.textContent=song.title;
+
+    artist.textContent=song.artist;
+
+    updatePlaylist();
 
 }
+
+loadSong(0);
+
+// ===============================
+// Построение плейлиста
+// ===============================
+
+function createPlaylist(){
+
+    playlist.innerHTML="";
+
+    songs.forEach((song,i)=>{
+
+        const item=document.createElement("div");
+
+        item.className="song";
+
+        item.innerHTML=`
+            <strong>${song.title}</strong><br>
+            <small>${song.artist}</small>
+        `;
+
+        item.onclick=()=>{
+
+            loadSong(i);
+
+            playMusic();
+
+        };
+
+        playlist.appendChild(item);
+
+    });
+
+    updatePlaylist();
+
+}
+
+function updatePlaylist(){
+
+    document.querySelectorAll(".song").forEach((el,i)=>{
+
+        el.classList.toggle("active",i===index);
+
+    });
+
+}
+
+createPlaylist();
+
+// ===============================
+// Play
+// ===============================
+
+function playMusic(){
+
+    audio.play();
+
+    play.innerHTML="⏸";
+
+    playing=true;
+
+}
+
+// ===============================
+// Pause
+// ===============================
+
+function pauseMusic(){
+
+    audio.pause();
+
+    play.innerHTML="▶";
+
+    playing=false;
+
+}
+
+// ===============================
+// Кнопка Play
+// ===============================
+
+play.onclick=()=>{
+
+    if(playing){
+
+        pauseMusic();
+
+    }else{
+
+        playMusic();
+
+    }
 
 };
 
-no.onclick = function(){
+// ===============================
+// Следующий
+// ===============================
 
-if(!swap){
+next.onclick=()=>{
 
-buttons.appendChild(yes);
-buttons.appendChild(no);
+    if(random){
 
-}else{
+        index=Math.floor(Math.random()*songs.length);
 
-buttons.appendChild(no);
-buttons.appendChild(yes);
+    }else{
 
-}
+        index++;
 
-swap=!swap;
+        if(index>=songs.length){
+
+            index=0;
+
+        }
+
+    }
+
+    loadSong(index);
+
+    playMusic();
 
 };
 
-const hearts=document.getElementById("hearts");
+// ===============================
+// Предыдущий
+// ===============================
 
-for(let i=0;i<40;i++){
+prev.onclick=()=>{
 
-const heart=document.createElement("span");
+    index--;
 
-heart.innerHTML="❤️";
+    if(index<0){
 
-heart.style.left=Math.random()*100+"%";
+        index=songs.length-1;
 
-heart.style.fontSize=(18+Math.random()*25)+"px";
+    }
 
-heart.style.animationDuration=(5+Math.random()*6)+"s";
+    loadSong(index);
 
-heart.style.animationDelay=Math.random()*5+"s";
+    playMusic();
 
-hearts.appendChild(heart);
+};
+
+// ===============================
+// Автоматически следующий
+// ===============================
+
+audio.onended=()=>{
+
+    if(loop){
+
+        audio.currentTime=0;
+
+        playMusic();
+
+        return;
+
+    }
+
+    next.click();
+
+};
+
+// ===============================
+// Прогресс
+// ===============================
+
+audio.addEventListener("timeupdate",()=>{
+
+    progress.max=audio.duration||0;
+
+    progress.value=audio.currentTime||0;
+
+    current.innerHTML=format(audio.currentTime);
+
+    duration.innerHTML=format(audio.duration);
+
+});
+
+progress.oninput=()=>{
+
+    audio.currentTime=progress.value;
+
+};
+
+// ===============================
+// Громкость
+// ===============================
+
+volume.oninput=()=>{
+
+    audio.volume=volume.value;
+
+};
+
+// ===============================
+// Формат времени
+// ===============================
+
+function format(sec){
+
+    if(isNaN(sec)) return "0:00";
+
+    let m=Math.floor(sec/60);
+
+    let s=Math.floor(sec%60);
+
+    if(s<10){
+
+        s="0"+s;
+
+    }
+
+    return m+":"+s;
+
+}
+// ===============================
+// Shuffle
+// ===============================
+
+shuffle.onclick=()=>{
+
+    random=!random;
+
+    shuffle.style.background=
+    random ? "#1db954" : "#222";
+
+};
+
+// ===============================
+// Repeat
+// ===============================
+
+repeat.onclick=()=>{
+
+    loop=!loop;
+
+    repeat.style.background=
+    loop ? "#1db954" : "#222";
+
+};
+
+// ===============================
+// Запоминаем громкость
+// ===============================
+
+volume.value=localStorage.getItem("volume")||1;
+
+audio.volume=volume.value;
+
+volume.oninput=()=>{
+
+    audio.volume=volume.value;
+
+    localStorage.setItem("volume",volume.value);
+
+};
+
+// ===============================
+// Горячие клавиши
+// ===============================
+
+document.addEventListener("keydown",(e)=>{
+
+    switch(e.code){
+
+        case "Space":
+
+            e.preventDefault();
+
+            play.click();
+
+        break;
+
+        case "ArrowRight":
+
+            next.click();
+
+        break;
+
+        case "ArrowLeft":
+
+            prev.click();
+
+        break;
+
+    }
+
+});
+
+// ===============================
+// Вращение обложки
+// ===============================
+
+let angle=0;
+
+setInterval(()=>{
+
+    if(playing){
+
+        angle+=0.4;
+
+        cover.style.transform=
+        "rotate("+angle+"deg)";
+
+    }
+
+},20);
+
+// ===============================
+// Визуализатор
+// ===============================
+
+const audioContext=
+new(window.AudioContext||window.webkitAudioContext)();
+
+const source=
+audioContext.createMediaElementSource(audio);
+
+const analyser=
+audioContext.createAnalyser();
+
+source.connect(analyser);
+
+analyser.connect(audioContext.destination);
+
+analyser.fftSize=128;
+
+const bufferLength=
+analyser.frequencyBinCount;
+
+const dataArray=
+new Uint8Array(bufferLength);
+
+canvas.width=390;
+
+canvas.height=80;
+
+function draw(){
+
+requestAnimationFrame(draw);
+
+analyser.getByteFrequencyData(dataArray);
+
+ctx.clearRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+const w=
+canvas.width/bufferLength;
+
+for(let i=0;i<bufferLength;i++){
+
+const h=dataArray[i];
+
+ctx.fillStyle=
+`rgb(${40+h},${180-h/3},90)`;
+
+ctx.fillRect(
+
+i*w,
+
+canvas.height-h/2,
+
+w-2,
+
+h/2
+
+);
 
 }
 
-function confetti(){
+}
 
-for(let i=0;i<120;i++){
+draw();
 
-const e=document.createElement("span");
+// ===============================
+// Chrome
+// ===============================
 
-e.innerHTML=["❤️","💖","✨","🎉"][Math.floor(Math.random()*4)];
+document.body.addEventListener("click",()=>{
 
-e.style.position="fixed";
-e.style.left=Math.random()*100+"vw";
-e.style.top="-30px";
-e.style.fontSize=(18+Math.random()*20)+"px";
-e.style.transition="4s linear";
+if(audioContext.state==="suspended"){
 
-document.body.appendChild(e);
-
-setTimeout(()=>{
-
-e.style.transform="translateY(120vh) rotate(720deg)";
-
-},30);
-
-setTimeout(()=>{
-
-e.remove();
-
-},4200);
+audioContext.resume();
 
 }
 
-}
+},{once:true});
+
+// ===============================
+// Первый запуск
+// ===============================
+
+loadSong(0);
+
+createPlaylist();
+
+audio.volume=volume.value;
 
 </script>
 
