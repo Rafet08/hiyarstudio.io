@@ -1,0 +1,308 @@
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;
+  font-family: Arial, Helvetica, sans-serif;
+  touch-action: none;
+}
+
+body {
+  position: relative;
+}
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* HUD */
+#hud {
+  position: fixed;
+  inset: 0 auto auto 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.hud-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hud-col.center {
+  align-items: center;
+}
+
+.hud-col.right {
+  align-items: flex-end;
+}
+
+.hud-box {
+  min-width: 110px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(8, 12, 20, 0.58);
+  border: 1px solid rgba(255,255,255,0.12);
+  backdrop-filter: blur(8px);
+  color: #fff;
+}
+
+.hud-box.big {
+  min-width: 150px;
+  text-align: center;
+}
+
+.hud-label {
+  font-size: 11px;
+  letter-spacing: 1px;
+  opacity: 0.75;
+  margin-bottom: 4px;
+}
+
+.hud-value {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+/* overlays */
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0,0,0,0.45);
+  z-index: 50;
+}
+
+.overlay.visible {
+  display: flex;
+}
+
+.panel {
+  width: min(92vw, 520px);
+  padding: 26px 22px;
+  border-radius: 20px;
+  background: rgba(8, 12, 20, 0.92);
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+.panel h1 {
+  margin: 0 0 14px;
+  font-size: clamp(28px, 4vw, 40px);
+}
+
+.panel p {
+  margin: 8px 0;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+.panel button {
+  margin-top: 18px;
+  min-width: 180px;
+  padding: 14px 22px;
+  border: 0;
+  border-radius: 14px;
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+  background: linear-gradient(180deg, #ffd65a, #ffae00);
+  color: #111;
+}
+
+/* mobile controls */
+#mobileControls {
+  position: fixed;
+  inset: auto 0 14px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 14px;
+  z-index: 30;
+  pointer-events: none;
+}
+
+.mobile-side {
+  display: flex;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.mobile-side.right {
+  flex-direction: column-reverse;
+}
+
+.control-btn {
+  border: 0;
+  border-radius: 18px;
+  color: #fff;
+  font-weight: 800;
+  background: rgba(12, 18, 28, 0.7);
+  border: 1px solid rgba(255,255,255,0.14);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+  user-select: none;
+  touch-action: none;
+}
+
+.steer-btn {
+  width: 74px;
+  height: 74px;
+  font-size: 30px;
+}
+
+.pedal-btn {
+  width: 110px;
+  height: 64px;
+  font-size: 18px;
+}
+
+.pedal-btn.gas {
+  height: 82px;
+  background: rgba(0, 135, 75, 0.72);
+}
+
+.control-btn.active {
+  transform: scale(0.96);
+  filter: brightness(1.18);
+}
+
+@media (min-width: 1100px) {
+  .steer-btn {
+    width: 86px;
+    height: 86px;
+  }
+
+  .pedal-btn {
+    width: 126px;
+    height: 72px;
+  }
+
+  .pedal-btn.gas {
+    height: 94px;
+  }
+}
+
+@media (max-width: 900px) {
+  #hud {
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .hud-box {
+    min-width: 88px;
+    padding: 8px 10px;
+    border-radius: 12px;
+  }
+
+  .hud-box.big {
+    min-width: 118px;
+  }
+
+  .hud-label {
+    font-size: 10px;
+  }
+
+  .hud-value {
+    font-size: 17px;
+  }
+
+  .panel {
+    padding: 20px 16px;
+  }
+
+  .panel h1 {
+    font-size: 28px;
+  }
+
+  .panel p {
+    font-size: 14px;
+  }
+
+  .panel button {
+    min-width: 160px;
+    font-size: 16px;
+    padding: 12px 18px;
+  }
+
+  .steer-btn {
+    width: 64px;
+    height: 64px;
+    font-size: 26px;
+  }
+
+  .pedal-btn {
+    width: 96px;
+    height: 58px;
+    font-size: 16px;
+  }
+
+  .pedal-btn.gas {
+    height: 74px;
+  }
+}
+
+@media (max-width: 560px) {
+  #hud {
+    align-items: flex-start;
+  }
+
+  .hud-col {
+    gap: 6px;
+  }
+
+  .hud-box {
+    min-width: 72px;
+    padding: 7px 8px;
+  }
+
+  .hud-box.big {
+    min-width: 100px;
+  }
+
+  .hud-value {
+    font-size: 15px;
+  }
+
+  #mobileControls {
+    padding: 0 10px;
+    bottom: 10px;
+  }
+
+  .mobile-side {
+    gap: 8px;
+  }
+
+  .steer-btn {
+    width: 58px;
+    height: 58px;
+    font-size: 22px;
+  }
+
+  .pedal-btn {
+    width: 88px;
+    height: 54px;
+    font-size: 14px;
+  }
+
+  .pedal-btn.gas {
+    height: 68px;
+  }
+}
