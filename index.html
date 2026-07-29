@@ -1,0 +1,861 @@
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<!-- iPhone PWA -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kaspi App">
+<meta name="theme-color" content="#ffffff">
+
+<!-- Иконка приложения -->
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" href="icon.png">
+
+<title>Kaspi App</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+-webkit-tap-highlight-color:transparent;
+}
+
+body{
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.phone{
+width:390px;
+height:844px;
+background:#f5f5f7;
+overflow:hidden;
+position:relative;
+border-radius:40px;
+}
+
+.screen{
+display:none;
+width:100%;
+height:100%;
+flex-direction:column;
+}
+
+.screen.active{
+display:flex;
+}
+
+.header{
+background:#fff;
+padding:16px;
+display:flex;
+align-items:center;
+border-bottom:1px solid #eee;
+}
+
+.back{
+font-size:26px;
+margin-right:10px;
+cursor:pointer;
+}
+
+.title{
+flex:1;
+text-align:center;
+font-size:20px;
+font-weight:600;
+margin-right:26px;
+}
+
+/* Вход */
+.pin-top{
+padding:18px;
+display:flex;
+justify-content:space-between;
+color:#e53935;
+font-size:22px;
+}
+
+.pin-body{
+flex:1;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+}
+
+.avatar{
+width:88px;
+height:88px;
+border-radius:50%;
+overflow:hidden;
+background:#ddd;
+margin-bottom:20px;
+}
+
+.avatar img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.pin-title{
+font-size:18px;
+margin-bottom:24px;
+}
+
+.dots{
+display:flex;
+gap:14px;
+margin-bottom:34px;
+}
+
+.dot{
+width:12px;
+height:12px;
+border-radius:50%;
+background:#ddd;
+}
+
+.dot.fill{
+background:#111;
+}
+
+.keypad{
+display:grid;
+grid-template-columns:repeat(3,80px);
+gap:14px;
+justify-content:center;
+padding-bottom:34px;
+}
+
+.key{
+width:80px;
+height:80px;
+border:none;
+border-radius:50%;
+background:#fff;
+font-size:28px;
+cursor:pointer;
+}
+
+/* Главная */
+.home-top{
+background:#fff;
+padding:12px 14px;
+display:flex;
+gap:10px;
+align-items:center;
+}
+
+.search{
+flex:1;
+height:42px;
+background:#eef0f2;
+border-radius:12px;
+padding:0 14px;
+border:none;
+outline:none;
+}
+
+.cart{
+font-size:26px;
+}
+
+.banners{
+display:flex;
+gap:12px;
+overflow:auto;
+padding:12px 14px;
+background:#fff;
+}
+
+.banner{
+min-width:180px;
+height:110px;
+border-radius:16px;
+overflow:hidden;
+background:#ddd;
+}
+
+.banner img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.services{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:18px 8px;
+background:#fff;
+padding:18px 10px;
+}
+
+.service{
+text-align:center;
+font-size:12px;
+color:#222;
+}
+
+.iconbox{
+width:52px;
+height:52px;
+margin:0 auto 6px;
+border-radius:14px;
+background:#f0f0f0;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+}
+
+.iconbox img{
+width:100%;
+height:100%;
+object-fit:contain;
+}
+
+.products{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+padding:14px;
+background:#fff;
+margin-top:10px;
+padding-bottom:90px;
+overflow:auto;
+}
+
+.product{
+display:flex;
+gap:10px;
+align-items:center;
+padding:8px;
+border-radius:14px;
+background:#fff;
+}
+
+.product img{
+width:52px;
+height:52px;
+border-radius:12px;
+object-fit:cover;
+}
+
+.product b{
+font-size:14px;
+}
+
+.product small{
+color:#777;
+}
+
+/* Госуслуги */
+.tabs{
+display:flex;
+margin:14px 16px;
+background:#ece9ee;
+border-radius:12px;
+padding:2px;
+}
+
+.tab{
+flex:1;
+padding:10px;
+border:none;
+background:transparent;
+border-radius:10px;
+font-size:15px;
+cursor:pointer;
+}
+
+.tab.active{
+background:#fff;
+font-weight:600;
+}
+
+.search2{
+margin:0 16px 14px;
+height:40px;
+background:#f0f0f4;
+border-radius:10px;
+padding:0 12px;
+border:none;
+outline:none;
+}
+
+.docs{
+display:flex;
+gap:10px;
+overflow:auto;
+padding:0 16px 14px;
+}
+
+.doc{
+min-width:128px;
+height:110px;
+border-radius:16px;
+padding:12px;
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+font-size:12px;
+font-weight:600;
+}
+
+.doc img{
+width:34px;
+height:34px;
+object-fit:contain;
+}
+
+.green{background:#eef7ec;}
+.blue{background:#e8f6fb;}
+.dark{background:#eef2fb;}
+
+.list{
+background:#fff;
+margin-top:10px;
+}
+
+.item{
+display:flex;
+align-items:center;
+padding:14px 16px;
+border-bottom:1px solid #f0f0f0;
+gap:12px;
+}
+
+.item img{
+width:34px;
+height:34px;
+}
+
+.item .txt{
+flex:1;
+}
+
+.item .txt b{
+display:block;
+font-size:15px;
+}
+
+.item .txt small{
+color:#777;
+}
+
+.arrow{
+color:#bbb;
+font-size:20px;
+}
+
+/* Документ */
+.content{
+padding:0 16px 90px;
+}
+
+.upload{
+display:block;
+width:180px;
+margin:18px auto;
+text-align:center;
+background:#0a63ff;
+color:#fff;
+padding:12px 0;
+border-radius:12px;
+font-weight:600;
+cursor:pointer;
+}
+
+#fileInput{
+display:none;
+}
+
+.card{
+background:#fff;
+border-radius:18px;
+padding:14px;
+box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+
+.preview{
+width:100%;
+height:260px;
+border-radius:14px;
+object-fit:cover;
+background:#ddd;
+}
+
+.docText{
+text-align:center;
+margin-top:12px;
+}
+
+.req{
+background:#fff;
+border-radius:18px;
+overflow:hidden;
+display:none;
+}
+
+.row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:16px;
+border-bottom:1px solid #f0f0f0;
+}
+
+.row:last-child{
+border-bottom:none;
+}
+
+.label{
+font-size:12px;
+color:#8e8e93;
+margin-bottom:4px;
+}
+
+.value{
+font-size:15px;
+font-weight:500;
+}
+
+.copy{
+width:34px;
+height:34px;
+border:none;
+border-radius:10px;
+background:#f2f2f7;
+cursor:pointer;
+}
+
+/* Нижнее меню */
+.bottom{
+position:absolute;
+bottom:0;
+left:0;
+right:0;
+height:62px;
+background:#fff;
+border-top:1px solid #ddd;
+display:none;
+justify-content:space-around;
+align-items:center;
+}
+
+.nav{
+display:flex;
+flex-direction:column;
+align-items:center;
+font-size:11px;
+color:#666;
+cursor:pointer;
+}
+
+.nav.active{
+color:#e53935;
+}
+
+.toast{
+position:absolute;
+top:18px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(0,0,0,.85);
+color:#fff;
+padding:10px 16px;
+border-radius:20px;
+font-size:14px;
+display:none;
+z-index:999;
+}
+</style>
+</head>
+<body>
+
+<div class="phone">
+
+<div id="toast" class="toast">Скопировано</div>
+
+<!-- ВХОД -->
+<section id="pin" class="screen active">
+
+<div class="pin-top">
+<span>✕</span>
+<span>➜</span>
+</div>
+
+<div class="pin-body">
+
+<div class="avatar">
+<!-- ВСТАВЬ СВОЕ ФОТО -->
+<img src="image/avatar.jpeg" alt="avatar">
+</div>
+
+<div class="pin-title">Код быстрого доступа</div>
+
+<div class="dots">
+<div class="dot" id="d0"></div>
+<div class="dot" id="d1"></div>
+<div class="dot" id="d2"></div>
+<div class="dot" id="d3"></div>
+</div>
+
+</div>
+
+<div class="keypad">
+<button class="key" onclick="pinInput(1)">1</button>
+<button class="key" onclick="pinInput(2)">2</button>
+<button class="key" onclick="pinInput(3)">3</button>
+<button class="key" onclick="pinInput(4)">4</button>
+<button class="key" onclick="pinInput(5)">5</button>
+<button class="key" onclick="pinInput(6)">6</button>
+<button class="key" onclick="pinInput(7)">7</button>
+<button class="key" onclick="pinInput(8)">8</button>
+<button class="key" onclick="pinInput(9)">9</button>
+<div></div>
+<button class="key" onclick="pinInput(0)">0</button>
+<button class="key" onclick="pinDel()">⌫</button>
+</div>
+
+</section>
+
+<!-- ГЛАВНАЯ -->
+<section id="home" class="screen">
+
+<div class="home-top">
+<input class="search" placeholder="Поиск по Kaspi.kz">
+<div class="cart">🛒</div>
+</div>
+
+<div class="banners">
+
+<div class="banner">
+<img src="image/banner1.jpg" alt="">
+</div>
+
+<div class="banner">
+<img src="image/banner2.jpg" alt="">
+</div>
+
+</div>
+
+<div class="services">
+
+<div class="service">
+<div class="iconbox">
+<img src="image/magazin.png" alt="">
+</div>
+Магазин
+</div>
+
+<div class="service">
+<div class="iconbox">
+<img src="image/moi.png" alt="">
+</div>
+Мой Банк
+</div>
+
+<div class="service">
+<div class="iconbox">
+<img src="image/plat.png" alt="">
+</div>
+Платежи
+</div>
+
+<div class="service">
+<div class="iconbox">
+<img src="image/per.png" alt="">
+</div>
+Переводы
+</div>
+
+<div class="service">
+<div class="iconbox">
+<img src="image/magnum.png" alt="">
+</div>
+Magnum
+</div>
+
+<div class="service">
+<div class="iconbox">
+<img src="image/travel.png" alt="">
+</div>
+Travel
+</div>
+
+<div class="service" onclick="showScreen('gov')">
+<div class="iconbox">
+<img src="image/gos.png" alt="">
+</div>
+Госуслуги
+</div>
+
+<div class="service">
+<div class="iconbox">
+<img src="image/ob.png" alt="">
+</div>
+Объявления
+</div>
+
+</div>
+
+<div class="products">
+
+<div class="product">
+<img src="image/p1.jpg" alt="">
+<div><b>Рассрочка 0-0-12</b></div>
+</div>
+
+<div class="product">
+<img src="image/p2.jpg" alt="">
+<div><b>Кредит</b><br><small>до 2 млн ₸</small></div>
+</div>
+
+<div class="product">
+<img src="image/p3.jpg" alt="">
+<div><b>Kaspi Red+</b><br><small>до 500 000 ₸</small></div>
+</div>
+
+<div class="product">
+<img src="image/p4.jpg" alt="">
+<div><b>Накопительный депозит</b><br><small>20%</small></div>
+</div>
+
+</div>
+
+</section>
+
+<!-- ГОСУСЛУГИ -->
+<section id="gov" class="screen">
+
+<div class="header">
+<div class="back" onclick="showScreen('home')">‹</div>
+<div class="title">Госуслуги</div>
+</div>
+
+<div class="tabs">
+<button class="tab active">Все услуги</button>
+<button class="tab">Мои заявки</button>
+</div>
+
+<input class="search2" placeholder="Поиск по Госуслугам">
+
+<div class="docs">
+
+<div class="doc green" onclick="showScreen('idcard')">
+<img src="image/id.png" alt="">
+<span>Удостоверение личности</span>
+</div>
+
+<div class="doc blue">
+<img src="image/passport.png" alt="">
+<span>Паспорт гражданина РК</span>
+</div>
+
+<div class="doc dark">
+<img src="image/student.png" alt="">
+<span>Студенческий билет</span>
+</div>
+
+</div>
+
+<div class="list">
+
+<div class="item">
+<img src="image/doc.png" alt="">
+<div class="txt"><b>Справки</b><small>Социальные, медицинские</small></div>
+<div class="arrow">›</div>
+</div>
+
+<div class="item">
+<img src="image/home.png" alt="">
+<div class="txt"><b>Прописка</b><small>По месту жительства</small></div>
+<div class="arrow">›</div>
+</div>
+
+<div class="item">
+<img src="image/money.png" alt="">
+<div class="txt"><b>Пособия</b><small>На ребенка, многодетным</small></div>
+<div class="arrow">›</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- УДОСТОВЕРЕНИЕ -->
+<section id="idcard" class="screen">
+
+<div class="header">
+<div class="back" onclick="showScreen('gov')">‹</div>
+<div class="title">Удостоверение личности</div>
+</div>
+
+<div class="tabs">
+<button class="tab active" id="tabDoc" onclick="switchTab('doc')">Документ</button>
+<button class="tab" id="tabReq" onclick="switchTab('req')">Реквизиты</button>
+</div>
+
+<div class="content">
+
+<div id="docTab">
+
+<label for="fileInput" class="upload">Загрузить</label>
+<input type="file" id="fileInput" accept="image/*">
+
+<div class="card">
+
+<img id="preview" class="preview" src="image/document.jpg" alt="">
+
+<div class="docText">
+<h3>УДОСТОВЕРЕНИЕ ЛИЧНОСТИ</h3>
+<p>Официальный электронный аналог РК</p>
+</div>
+
+</div>
+
+</div>
+
+<div id="reqTab" class="req">
+
+<div class="row">
+<div><div class="label">ФИО</div><div class="value" id="fio">ТВОЕ ФИО</div></div>
+<button class="copy" onclick="copyVal('fio')">📋</button>
+</div>
+
+<div class="row">
+<div><div class="label">ИИН</div><div class="value" id="iin">000000000000</div></div>
+<button class="copy" onclick="copyVal('iin')">📋</button>
+</div>
+
+<div class="row">
+<div><div class="label">Дата рождения</div><div class="value" id="birth">00.00.0000</div></div>
+<button class="copy" onclick="copyVal('birth')">📋</button>
+</div>
+
+<div class="row">
+<div><div class="label">Номер документа</div><div class="value" id="num">N00000000</div></div>
+<button class="copy" onclick="copyVal('num')">📋</button>
+</div>
+
+<div class="row">
+<div><div class="label">Дата выдачи</div><div class="value" id="date">00.00.0000</div></div>
+<button class="copy" onclick="copyVal('date')">📋</button>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- НИЖНЕЕ МЕНЮ -->
+<div class="bottom" id="bottom">
+
+<div class="nav active" onclick="showScreen('home')">
+<div>🏠</div>
+<div>Главная</div>
+</div>
+
+<div class="nav">
+<div>🔳</div>
+<div>Kaspi QR</div>
+</div>
+
+<div class="nav">
+<div>💬</div>
+<div>Сообщения</div>
+</div>
+
+<div class="nav" onclick="showScreen('gov')">
+<div>⚙️</div>
+<div>Сервисы</div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+let pin='';
+
+function pinInput(n){
+ if(pin.length<4){
+   pin+=n;
+   updateDots();
+   if(pin.length===4){
+     setTimeout(()=>{
+       showScreen('home');
+       document.getElementById('bottom').style.display='flex';
+     },200);
+   }
+ }
+}
+
+function pinDel(){
+ pin=pin.slice(0,-1);
+ updateDots();
+}
+
+function updateDots(){
+ for(let i=0;i<4;i++){
+  document.getElementById('d'+i).classList.toggle('fill',i<pin.length);
+ }
+}
+
+function showScreen(id){
+ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+}
+
+function switchTab(t){
+ const docBtn=document.getElementById('tabDoc');
+ const reqBtn=document.getElementById('tabReq');
+ const doc=document.getElementById('docTab');
+ const req=document.getElementById('reqTab');
+
+ if(t==='doc'){
+   docBtn.classList.add('active');
+   reqBtn.classList.remove('active');
+   doc.style.display='block';
+   req.style.display='none';
+ }else{
+   reqBtn.classList.add('active');
+   docBtn.classList.remove('active');
+   req.style.display='block';
+   doc.style.display='none';
+ }
+}
+
+document.getElementById('fileInput').addEventListener('change',e=>{
+ const file=e.target.files[0];
+ if(file){
+   const r=new FileReader();
+   r.onload=ev=>document.getElementById('preview').src=ev.target.result;
+   r.readAsDataURL(file);
+ }
+});
+
+function copyVal(id){
+ navigator.clipboard.writeText(document.getElementById(id).innerText);
+ const t=document.getElementById('toast');
+ t.style.display='block';
+ setTimeout(()=>t.style.display='none',1500);
+}
+</script>
+
+</body>
+</html>
+```
