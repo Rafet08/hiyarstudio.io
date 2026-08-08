@@ -80,7 +80,7 @@ width:100%;
 height:100%;
 flex-direction:column;
 padding-top:47px; /* Место под Dynamic Island */
-padding-bottom:34px; /* Место под Home Indicator */
+padding-bottom:60px; /* Место под нижнее меню */
 overflow:hidden;
 }
 
@@ -96,28 +96,33 @@ overflow-y:auto;
 
 .header{
 background:#fff;
-padding:16px;
+padding:14px 16px;
 display:flex;
 align-items:center;
 border-bottom:1px solid #eee;
 }
 
 .back{
-font-size:26px;
+font-size:24px;
 margin-right:10px;
 cursor:pointer;
 line-height:1;
+color: #333;
 }
 
 .title{
 flex:1;
 text-align:center;
-font-size:18px;
+font-size:17px;
 font-weight:600;
-margin-right:26px;
+margin-right:24px;
+color:#1c1c1e;
 }
 
 /* Вход */
+#pin {
+padding-bottom: 34px;
+}
 .pin-top{
 padding:18px 24px;
 display:flex;
@@ -285,7 +290,7 @@ object-fit:contain;
 display:grid;
 grid-template-columns:1fr 1fr;
 gap:12px;
-padding:12px 16px 80px;
+padding:12px 16px 20px;
 background:#f5f5f7;
 margin-top:8px;
 }
@@ -319,24 +324,27 @@ font-size:11px;
 .tabs{
 display:flex;
 margin:12px 16px;
-background:#ece9ee;
+background:#e3e3e8;
 border-radius:10px;
 padding:2px;
 }
 
 .tab{
 flex:1;
-padding:8px;
+padding:7px;
 border:none;
 background:transparent;
 border-radius:8px;
-font-size:14px;
+font-size:13px;
 cursor:pointer;
+color:#666;
+font-weight:500;
 }
 
 .tab.active{
 background:#fff;
 font-weight:600;
+color:#000;
 box-shadow:0 1px 3px rgba(0,0,0,0.1);
 }
 
@@ -344,7 +352,7 @@ box-shadow:0 1px 3px rgba(0,0,0,0.1);
 margin:0 16px 12px;
 width:calc(100% - 32px);
 height:38px;
-background:#f0f0f4;
+background:#ece9ee;
 border-radius:10px;
 padding:0 12px;
 border:none;
@@ -352,11 +360,26 @@ outline:none;
 font-size:14px;
 }
 
+.docs-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 4px 16px 10px;
+font-size: 15px;
+font-weight: 600;
+color: #333;
+}
+
+.docs-header .arrow {
+color: #a8a8a8;
+font-size: 18px;
+}
+
 .docs{
 display:flex;
 gap:12px;
 overflow-x:auto;
-padding:0 16px 12px;
+padding:0 16px 16px;
 scrollbar-width:none;
 }
 
@@ -378,10 +401,18 @@ flex-shrink:0;
 cursor:pointer;
 }
 
-.doc img{
-width:34px;
-height:34px;
-object-fit:contain;
+.doc-card-inner {
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+height: 100%;
+}
+
+.doc-icon-wrap {
+display: flex;
+align-items: center;
+justify-content: flex-start;
+margin-bottom: 8px;
 }
 
 .green{background:#eef7ec;}
@@ -390,20 +421,24 @@ object-fit:contain;
 
 .list{
 background:#fff;
-margin-top:8px;
+margin-top:4px;
 }
 
 .item{
 display:flex;
 align-items:center;
-padding:14px 16px;
+padding:12px 16px;
 border-bottom:1px solid #f0f0f0;
 gap:12px;
 }
 
-.item img{
-width:32px;
-height:32px;
+.item-icon {
+width: 32px;
+height: 32px;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
 }
 
 .item .txt{
@@ -412,120 +447,135 @@ flex:1;
 
 .item .txt b{
 display:block;
-font-size:15px;
-}
-
-.item .txt small{
-color:#777;
-font-size:12px;
-}
-
-.arrow{
-color:#bbb;
-font-size:20px;
-}
-
-/* Документ */
-.content{
-padding:0 16px 80px;
-}
-
-.upload{
-display:block;
-width:180px;
-margin:16px auto;
-text-align:center;
-background:#0a63ff;
-color:#fff;
-padding:10px 0;
-border-radius:12px;
-font-weight:600;
 font-size:14px;
-cursor:pointer;
-}
-
-#fileInput{
-display:none;
-}
-
-.card{
-background:#fff;
-border-radius:18px;
-padding:14px;
-box-shadow:0 2px 8px rgba(0,0,0,.06);
-}
-
-.preview{
-width:100%;
-height:250px;
-border-radius:14px;
-object-fit:cover;
-background:#ddd;
-}
-
-.docText{
-text-align:center;
-margin-top:12px;
-}
-
-.docText h3{
-font-size:16px;
-}
-
-.docText p{
-font-size:13px;
-color:#666;
-}
-
-.req{
-background:#fff;
-border-radius:18px;
-overflow:hidden;
-display:none;
-}
-
-.row{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:14px 16px;
-border-bottom:1px solid #f0f0f0;
-}
-
-.row:last-child{
-border-bottom:none;
-}
-
-.label{
-font-size:12px;
-color:#8e8e93;
+font-weight:600;
+color:#222;
 margin-bottom:2px;
 }
 
-.value{
-font-size:15px;
-font-weight:500;
+.item .txt small{
+color:#8e8e93;
+font-size:11px;
 }
 
-.copy{
-width:34px;
-height:34px;
-border:none;
-border-radius:10px;
-background:#f2f2f7;
-cursor:pointer;
-display:flex;
-align-items:center;
-justify-content:center;
+/* Удостоверение личности */
+.id-content {
+padding: 0 16px 20px;
 }
+
+.doc-images {
+display: flex;
+flex-direction: column;
+gap: 12px;
+margin-top: 10px;
+margin-bottom: 20px;
+}
+
+.doc-card-img {
+width: 100%;
+height: 210px;
+border-radius: 12px;
+object-fit: cover;
+background: #e0e0e0;
+box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+cursor: pointer;
+}
+
+.btn-primary {
+width: 100%;
+height: 48px;
+background: #2f68e6;
+color: #fff;
+border: none;
+border-radius: 12px;
+font-size: 15px;
+font-weight: 600;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+margin-bottom: 10px;
+cursor: pointer;
+}
+
+.btn-secondary {
+width: 100%;
+height: 48px;
+background: #fff;
+color: #2f68e6;
+border: 1px solid #2f68e6;
+border-radius: 12px;
+font-size: 15px;
+font-weight: 600;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+cursor: pointer;
+}
+
+/* Реквизиты */
+.req-container {
+background: #fff;
+border-radius: 14px;
+padding: 4px 16px;
+margin-top: 10px;
+}
+
+.req-item {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 12px 0;
+border-bottom: 1px solid #f0f0f0;
+}
+
+.req-item:last-child {
+border-bottom: none;
+}
+
+.req-label {
+font-size: 13px;
+color: #8e8e93;
+margin-bottom: 3px;
+}
+
+.req-val {
+font-size: 15px;
+font-weight: 500;
+color: #1c1c1e;
+}
+
+.copy-icon {
+cursor: pointer;
+padding: 4px;
+color: #000;
+opacity: 0.6;
+}
+
+.btn-req-send {
+margin-top: 20px;
+}
+
+
+/* Редактирование реквизитов */
+.req-toolbar{display:flex;justify-content:flex-end;margin:4px 0 8px}
+.edit-req-btn{border:none;background:#eef3ff;color:#2f68e6;border-radius:10px;padding:8px 12px;font-size:13px;font-weight:600;cursor:pointer}
+.edit-req-btn:active{transform:scale(.98)}
+.req-input{display:block;width:100%;border:none;outline:none;background:transparent;padding:0;margin:0;font-family:inherit}
+.req-input[readonly]{pointer-events:auto;cursor:text}
+.req-input:not([readonly]){background:#f3f5f7;border-radius:8px;padding:7px 9px;margin-top:-4px;margin-bottom:-4px}
+.req-input::placeholder{color:#a0a0a5}
+.req-input.editing{background:#f3f5f7;border-radius:8px;padding:7px 9px;margin-top:-4px;margin-bottom:-4px}
 
 /* Нижнее меню */
 .bottom{
 position:absolute;
-bottom:34px;
+bottom:0;
 left:0;
 right:0;
-height:56px;
+height:60px;
+padding-bottom: 10px;
 background:#fff;
 border-top:1px solid #e5e5e5;
 display:none;
@@ -539,13 +589,9 @@ display:flex;
 flex-direction:column;
 align-items:center;
 font-size:10px;
-color:#666;
+color:#8e8e93;
 cursor:pointer;
-gap:2px;
-}
-
-.nav div:first-child{
-font-size:18px;
+gap:3px;
 }
 
 .nav.active{
@@ -565,9 +611,129 @@ font-size:13px;
 display:none;
 z-index:9999;
 }
+
+/* ===== iPhone 15 mobile layout ===== */
+html{
+  width:100%;
+  min-height:100%;
+  background:#f2f3f5;
+  -webkit-text-size-adjust:100%;
+}
+body{
+  width:100%;
+  min-width:0 !important;
+  max-width:100% !important;
+  margin:0 !important;
+  padding:0 !important;
+  overflow-x:hidden !important;
+  background:#f2f3f5;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Arial,sans-serif;
+}
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+button,a{
+  touch-action:manipulation;
+}
+input,button,textarea,select{
+  font-size:16px; /* не вызывает zoom в iOS */
+}
+
+/* Основной экран телефона */
+.app,.phone,.container,.screen,.page{
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+}
+.screen{
+  min-height:100vh;
+  min-height:100dvh;
+}
+
+/* Убираем лишние горизонтальные отступы */
+main,.content,.screen-content,.page-content{
+  max-width:100% !important;
+}
+
+/* Без скролла всей страницы, если приложение использует внутренний экран */
+body{
+  overscroll-behavior-x:none;
+}
+
+/* Нижнее меню учитывает Home Indicator iPhone */
+.bottom-nav,.bottom-menu,.tab-bar,.nav-bottom{
+  padding-bottom:max(10px, env(safe-area-inset-bottom)) !important;
+}
+
+/* iPhone 15: ширина 393px */
+@media (min-width:380px) and (max-width:430px){
+  body{
+    font-size:15px;
+  }
+
+  .header,.topbar,.app-header{
+    padding-left:16px !important;
+    padding-right:16px !important;
+  }
+
+  .content,.screen-content,.page-content,.container{
+    padding-left:16px !important;
+    padding-right:16px !important;
+  }
+
+  .card,.block,.section,.req-container{
+    width:100% !important;
+    max-width:100% !important;
+  }
+
+  .req-item{
+    min-width:0 !important;
+  }
+
+  .req-val{
+    max-width:100% !important;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  /* Кнопки удобны для пальца */
+  button{
+    min-height:44px;
+  }
+
+  /* Не оставляем пустые большие поля */
+  .hero,.banner,.promo{
+    margin-top:8px !important;
+    margin-bottom:12px !important;
+  }
+
+  /* Скрываем типичные desktop-only элементы */
+  .desktop-only,
+  .desktop-sidebar,
+  .sidebar{
+    display:none !important;
+  }
+}
+
+/* Очень узкие iPhone/SE */
+@media (max-width:379px){
+  .content,.screen-content,.page-content,.container{
+    padding-left:12px !important;
+    padding-right:12px !important;
+  }
+}
+
+/* Скрываем полосы прокрутки */
+::-webkit-scrollbar{
+  width:0;
+  height:0;
+  display:none;
+}
+
 </style>
 </head>
-<body>
+<body style="padding-top:env(safe-area-inset-top); padding-bottom:env(safe-area-inset-bottom);">
 
 <div class="phone">
 
@@ -749,21 +915,49 @@ Travel
 
 <input class="search2" placeholder="Поиск по Госуслугам">
 
+<div class="docs-header">
+<span>Все документы</span>
+<span class="arrow">›</span>
+</div>
+
 <div class="docs">
 
 <div class="doc green" onclick="showScreen('idcard')">
-<img src="image/id.png" alt="">
+<div class="doc-card-inner">
+<div class="doc-icon-wrap">
+  <svg width="28" height="20" viewBox="0 0 28 20" fill="none">
+    <rect width="28" height="20" rx="3" fill="#A8D5BA"/>
+    <circle cx="7" cy="10" r="3" fill="#fff"/>
+    <rect x="13" y="6" width="10" height="2" rx="1" fill="#fff"/>
+    <rect x="13" y="10" width="8" height="2" rx="1" fill="#fff"/>
+  </svg>
+</div>
 <span>Удостоверение личности</span>
+</div>
 </div>
 
 <div class="doc blue">
-<img src="image/passport.png" alt="">
+<div class="doc-card-inner">
+<div class="doc-icon-wrap">
+  <svg width="22" height="28" viewBox="0 0 22 28" fill="none">
+    <rect width="22" height="28" rx="3" fill="#6FB3B8"/>
+    <circle cx="11" cy="14" r="5" stroke="#fff" stroke-width="1.5"/>
+  </svg>
+</div>
 <span>Паспорт гражданина РК</span>
+</div>
 </div>
 
 <div class="doc dark">
-<img src="image/student.png" alt="">
+<div class="doc-card-inner">
+<div class="doc-icon-wrap">
+  <svg width="26" height="22" viewBox="0 0 26 22" fill="none">
+    <path d="M13 2L2 8L13 14L24 8L13 2Z" fill="#2C3E50"/>
+    <path d="M6 11V16C6 16 9 19 13 19C17 19 20 16 20 16V11" stroke="#2C3E50" stroke-width="2"/>
+  </svg>
+</div>
 <span>Студенческий билет</span>
+</div>
 </div>
 
 </div>
@@ -771,20 +965,63 @@ Travel
 <div class="list">
 
 <div class="item">
-<img src="image/doc.png" alt="">
-<div class="txt"><b>Справки</b><small>Социальные, медицинские</small></div>
+<div class="item-icon">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e53935" stroke-width="1.8">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <polyline points="14 2 14 8 20 8"/>
+    <line x1="16" y1="13" x2="8" y2="13"/>
+    <line x1="16" y1="17" x2="8" y2="17"/>
+    <line x1="10" y1="9" x2="8" y2="9"/>
+  </svg>
+</div>
+<div class="txt">
+<b>Справки</b>
+<small>Социальные, недвижимости и медицинские</small>
+</div>
 <div class="arrow">›</div>
 </div>
 
 <div class="item">
-<img src="image/home.png" alt="">
-<div class="txt"><b>Прописка</b><small>По месту жительства</small></div>
+<div class="item-icon">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e53935" stroke-width="1.8">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+    <polyline points="9 22 9 12 15 12 15 22"/>
+  </svg>
+</div>
+<div class="txt">
+<b>Прописка и снятие с прописки</b>
+<small>по месту жительства</small>
+</div>
 <div class="arrow">›</div>
 </div>
 
 <div class="item">
-<img src="image/money.png" alt="">
-<div class="txt"><b>Пособия</b><small>На ребенка, многодетным</small></div>
+<div class="item-icon">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e53935" stroke-width="1.8">
+    <circle cx="12" cy="12" r="9"/>
+    <path d="M12 7v10M9 10h6"/>
+  </svg>
+</div>
+<div class="txt">
+<b>Пособия и выплаты</b>
+<small>На ребенка, для многодетных, при потере работы</small>
+</div>
+<div class="arrow">›</div>
+</div>
+
+<div class="item">
+<div class="item-icon">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e53935" stroke-width="1.8">
+    <rect x="1" y="3" width="15" height="13"/>
+    <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+    <circle cx="5.5" cy="18.5" r="2.5"/>
+    <circle cx="18.5" cy="18.5" r="2.5"/>
+  </svg>
+</div>
+<div class="txt">
+<b>Переоформление автомобиля</b>
+<small>Купля-продажа и регистрация авто</small>
+</div>
 <div class="arrow">›</div>
 </div>
 
@@ -794,7 +1031,7 @@ Travel
 
 </section>
 
-<!-- УДОСТОВЕРЕНИЕ -->
+<!-- УДОСТОВЕРЕНИЕ ЛИЧНОСТИ -->
 <section id="idcard" class="screen">
 
 <div class="header">
@@ -809,52 +1046,132 @@ Travel
 <button class="tab" id="tabReq" onclick="switchTab('req')">Реквизиты</button>
 </div>
 
-<div class="content">
+<div class="id-content">
 
+<!-- ВКЛАДКА: ДОКУМЕНТ -->
 <div id="docTab">
+<div class="doc-images">
+  <!-- При клике по картине загружается соответствующий файл -->
+  <img id="cardFront" class="doc-card-img" src="image/id_front.jpg" alt="Передняя сторона" onclick="document.getElementById('fileFront').click()">
+  <img id="cardBack" class="doc-card-img" src="image/id_back.jpg" alt="Задняя сторона" onclick="document.getElementById('fileBack').click()">
+</div>
 
-<label for="fileInput" class="upload">Загрузить</label>
-<input type="file" id="fileInput" accept="image/*">
+<input type="file" id="fileFront" accept="image/*" style="display:none">
+<input type="file" id="fileBack" accept="image/*" style="display:none">
 
-<div class="card">
+<button class="btn-primary">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <rect x="3" y="3" width="7" height="7"/>
+    <rect x="14" y="3" width="7" height="7"/>
+    <rect x="14" y="14" width="7" height="7"/>
+    <rect x="3" y="14" width="7" height="7"/>
+  </svg>
+  Предъявить документ
+</button>
 
-<img id="preview" class="preview" src="image/document.jpg" alt="">
+<button class="btn-secondary">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+    <polyline points="16 6 12 2 8 6"/>
+    <line x1="12" y1="2" x2="12" y2="15"/>
+  </svg>
+  Отправить документ
+</button>
+</div>
 
-<div class="docText">
-<h3>УДОСТОВЕРЕНИЕ ЛИЧНОСТИ</h3>
-<p>Официальный электронный аналог РК</p>
+<!-- ВКЛАДКА: РЕКВИЗИТЫ -->
+<div id="reqTab" style="display:none;">
+
+<div class="req-container">
+
+<div class="req-item">
+  <div>
+    <div class="req-label">ФИО</div>
+    <input class="req-val req-input" id="fio" value="fake_kaspi_" readonly>
+  </div>
+  <div class="copy-icon" onclick="copyVal('fio')">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="9" y="9" width="13" height="13" rx="2"/>
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+    </svg>
+  </div>
+</div>
+
+<div class="req-item">
+  <div>
+    <div class="req-label">ИИН</div>
+    <input class="req-val req-input" id="iin" value="" placeholder="Введите ИИН" readonly>
+  </div>
+  <div class="copy-icon" onclick="copyVal('iin')">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="9" y="9" width="13" height="13" rx="2"/>
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+    </svg>
+  </div>
+</div>
+
+<div class="req-item">
+  <div>
+    <div class="req-label">Дата рождения</div>
+    <input class="req-val req-input" id="birth" value="" placeholder="ДД.ММ.ГГГГ" readonly>
+  </div>
+  <div class="copy-icon" onclick="copyVal('birth')">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="9" y="9" width="13" height="13" rx="2"/>
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+    </svg>
+  </div>
+</div>
+
+<div class="req-item">
+  <div>
+    <div class="req-label">Номер документа</div>
+    <input class="req-val req-input" id="num" value="N00000000" readonly>
+  </div>
+  <div class="copy-icon" onclick="copyVal('num')">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="9" y="9" width="13" height="13" rx="2"/>
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+    </svg>
+  </div>
+</div>
+
+<div class="req-item">
+  <div>
+    <div class="req-label">Дата выдачи</div>
+    <input class="req-val req-input" id="date" value="" placeholder="ДД.ММ.ГГГГ" readonly>
+  </div>
+  <div class="copy-icon" onclick="copyVal('date')">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="9" y="9" width="13" height="13" rx="2"/>
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+    </svg>
+  </div>
+</div>
+
+<div class="req-item">
+  <div>
+    <div class="req-label">Срок действия</div>
+    <input class="req-val req-input" id="exp" value="" placeholder="ДД.ММ.ГГГГ" readonly>
+  </div>
+  <div class="copy-icon" onclick="copyVal('exp')">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="9" y="9" width="13" height="13" rx="2"/>
+      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+    </svg>
+  </div>
 </div>
 
 </div>
 
-</div>
-
-<div id="reqTab" class="req">
-
-<div class="row">
-<div><div class="label">ФИО</div><div class="value" id="fio">ТВОЕ ФИО</div></div>
-<button class="copy" onclick="copyVal('fio')">📋</button>
-</div>
-
-<div class="row">
-<div><div class="label">ИИН</div><div class="value" id="iin">000000000000</div></div>
-<button class="copy" onclick="copyVal('iin')">📋</button>
-</div>
-
-<div class="row">
-<div><div class="label">Дата рождения</div><div class="value" id="birth">00.00.0000</div></div>
-<button class="copy" onclick="copyVal('birth')">📋</button>
-</div>
-
-<div class="row">
-<div><div class="label">Номер документа</div><div class="value" id="num">N00000000</div></div>
-<button class="copy" onclick="copyVal('num')">📋</button>
-</div>
-
-<div class="row">
-<div><div class="label">Дата выдачи</div><div class="value" id="date">00.00.0000</div></div>
-<button class="copy" onclick="copyVal('date')">📋</button>
-</div>
+<button class="btn-secondary btn-req-send">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+    <polyline points="16 6 12 2 8 6"/>
+    <line x1="12" y1="2" x2="12" y2="15"/>
+  </svg>
+  Отправить реквизиты
+</button>
 
 </div>
 
@@ -864,27 +1181,40 @@ Travel
 
 </section>
 
-<!-- НИЖНЕЕ МЕНЮ -->
+<!-- НИЖНЕЕ МЕНЮ (ВСЕГДА ЗАКРЕПЛЕНО СНИЗУ) -->
 <div class="bottom" id="bottom">
 
-<div class="nav active" onclick="showScreen('home')">
-<div>🏠</div>
-<div>Главная</div>
+<div class="nav" id="nav-home" onclick="setActiveNav('home')">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path class="icon-path" d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="#8e8e93" stroke-width="2"/>
+  </svg>
+  <span>Главная</span>
 </div>
 
-<div class="nav">
-<div>🔳</div>
-<div>Kaspi QR</div>
+<div class="nav" id="nav-qr" onclick="setActiveNav('qr')">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path class="icon-path" d="M4 8V5C4 4.44772 4.44772 4 5 4H8" stroke="#8e8e93" stroke-width="2"/>
+    <path class="icon-path" d="M16 4H19C19.5523 4 20 4.44772 20 5V8" stroke="#8e8e93" stroke-width="2"/>
+    <path class="icon-path" d="M20 16V19C20 19.5523 19.5523 20 19 20H16" stroke="#8e8e93" stroke-width="2"/>
+    <path class="icon-path" d="M8 20H5C4.44772 20 4 19.5523 4 19V16" stroke="#8e8e93" stroke-width="2"/>
+    <rect class="icon-fill" x="9" y="9" width="6" height="6" rx="1" fill="#8e8e93"/>
+  </svg>
+  <span>Kaspi QR</span>
 </div>
 
-<div class="nav">
-<div>💬</div>
-<div>Сообщения</div>
+<div class="nav" id="nav-msg" style="position:relative;" onclick="setActiveNav('msg')">
+  <span style="position:absolute; top:-2px; right:12px; background:#e53935; color:#fff; font-size:9px; border-radius:10px; padding:1px 5px; font-weight:bold;">1</span>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path class="icon-path" d="M21 11.5C21 15.6421 16.9706 19 12 19C10.6385 19 9.34907 18.7468 8.19253 18.2917L3 20L4.56847 16.1438C3.5855 14.8058 3 13.2201 3 11.5C3 7.35786 7.02944 4 12 4C16.9706 4 21 7.35786 21 11.5Z" stroke="#8e8e93" stroke-width="2"/>
+  </svg>
+  <span>Сообщения</span>
 </div>
 
-<div class="nav" onclick="showScreen('gov')">
-<div>⚙️</div>
-<div>Сервисы</div>
+<div class="nav active" id="nav-gov" onclick="setActiveNav('gov')">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path class="icon-path" d="M4 6H20M4 12H20M4 18H20" stroke="#e53935" stroke-width="2.2" stroke-linecap="round"/>
+  </svg>
+  <span>Сервисы</span>
 </div>
 
 </div>
@@ -895,68 +1225,268 @@ Travel
 let pin='';
 
 function pinInput(n){
- if(pin.length<4){
-   pin+=n;
-   updateDots();
-   if(pin.length===4){
-     setTimeout(()=>{
-       showScreen('home');
-       document.getElementById('bottom').style.display='flex';
-     },200);
-   }
- }
+  if(pin.length<4){
+    pin+=n;
+    updateDots();
+
+    if(pin.length===4){
+      setTimeout(()=>{
+        showScreen('home');
+        document.getElementById('bottom').style.display='flex';
+        setActiveNav('home');
+      },200);
+    }
+  }
 }
 
 function pinDel(){
- pin=pin.slice(0,-1);
- updateDots();
+  pin=pin.slice(0,-1);
+  updateDots();
 }
 
 function updateDots(){
- for(let i=0;i<4;i++){
-  document.getElementById('d'+i).classList.toggle('fill',i<pin.length);
- }
+  for(let i=0;i<4;i++){
+    const dot=document.getElementById('d'+i);
+    if(dot) dot.classList.toggle('fill',i<pin.length);
+  }
 }
 
+/*
+ * ВАЖНО:
+ * showScreen() только переключает экран.
+ * setActiveNav() только меняет активную кнопку.
+ * Раньше эти функции вызывали друг друга по кругу,
+ * из-за чего при открытии "Удостоверение личности"
+ * возникал бесконечный цикл.
+ */
 function showScreen(id){
- document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
- document.getElementById(id).classList.add('active');
+  const target=document.getElementById(id);
+
+  if(!target){
+    console.error('Экран не найден:', id);
+    return;
+  }
+
+  document.querySelectorAll('.screen').forEach(screen=>{
+    screen.classList.remove('active');
+  });
+
+  target.classList.add('active');
+
+  if(id==='home'){
+    setActiveNav('home');
+  }else if(id==='gov' || id==='idcard'){
+    setActiveNav('gov');
+  }
+}
+
+function setActiveNav(type){
+  const navs=document.querySelectorAll('.nav');
+
+  navs.forEach(nav=>{
+    nav.classList.remove('active');
+    nav.style.color='#8e8e93';
+
+    const paths=nav.querySelectorAll('.icon-path');
+    paths.forEach(path=>{
+      path.setAttribute('stroke','#8e8e93');
+    });
+
+    const fills=nav.querySelectorAll('.icon-fill');
+    fills.forEach(fill=>{
+      fill.setAttribute('fill','#8e8e93');
+    });
+  });
+
+  let activeId='nav-home';
+
+  if(type==='home') activeId='nav-home';
+  if(type==='qr') activeId='nav-qr';
+  if(type==='msg') activeId='nav-msg';
+  if(type==='gov') activeId='nav-gov';
+
+  const current=document.getElementById(activeId);
+
+  if(current){
+    current.classList.add('active');
+    current.style.color='#e53935';
+
+    const activePaths=current.querySelectorAll('.icon-path');
+    activePaths.forEach(path=>{
+      path.setAttribute('stroke','#e53935');
+    });
+
+    const activeFills=current.querySelectorAll('.icon-fill');
+    activeFills.forEach(fill=>{
+      fill.setAttribute('fill','#e53935');
+    });
+  }
 }
 
 function switchTab(t){
- const docBtn=document.getElementById('tabDoc');
- const reqBtn=document.getElementById('tabReq');
- const doc=document.getElementById('docTab');
- const req=document.getElementById('reqTab');
+  const docBtn=document.getElementById('tabDoc');
+  const reqBtn=document.getElementById('tabReq');
+  const doc=document.getElementById('docTab');
+  const req=document.getElementById('reqTab');
 
- if(t==='doc'){
-   docBtn.classList.add('active');
-   reqBtn.classList.remove('active');
-   doc.style.display='block';
-   req.style.display='none';
- }else{
-   reqBtn.classList.add('active');
-   docBtn.classList.remove('active');
-   req.style.display='block';
-   doc.style.display='none';
- }
+  if(!docBtn || !reqBtn || !doc || !req) return;
+
+  if(t==='doc'){
+    docBtn.classList.add('active');
+    reqBtn.classList.remove('active');
+    doc.style.display='block';
+    req.style.display='none';
+  }else{
+    reqBtn.classList.add('active');
+    docBtn.classList.remove('active');
+    req.style.display='block';
+    doc.style.display='none';
+  }
 }
 
-document.getElementById('fileInput').addEventListener('change',e=>{
- const file=e.target.files[0];
- if(file){
-   const r=new FileReader();
-   r.onload=ev=>document.getElementById('preview').src=ev.target.result;
-   r.readAsDataURL(file);
- }
-});
+function setupImageUpload(inputId, imageId){
+  const input=document.getElementById(inputId);
+  const image=document.getElementById(imageId);
+
+  if(!input || !image) return;
+
+  input.addEventListener('change',e=>{
+    const file=e.target.files && e.target.files[0];
+
+    if(!file) return;
+
+    if(!file.type.startsWith('image/')){
+      alert('Пожалуйста, выберите изображение.');
+      input.value='';
+      return;
+    }
+
+    const reader=new FileReader();
+
+    reader.onload=event=>{
+      image.src=event.target.result;
+    };
+
+    reader.onerror=()=>{
+      alert('Не удалось загрузить изображение.');
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
+
+
+function enableReqEdit(el){
+  if(!el || el.dataset.editing === 'true') return;
+
+  el.dataset.editing = 'true';
+  el.removeAttribute('readonly');
+  el.classList.add('editing');
+  el.focus();
+  try {
+    el.select();
+  } catch(e) {}
+}
+
+function saveReqEdit(el){
+  if(!el || el.dataset.editing !== 'true') return;
+
+  el.setAttribute('readonly','');
+  el.dataset.editing = 'false';
+  el.classList.remove('editing');
+  localStorage.setItem('req_' + el.id, el.value);
+}
+
+function setupReqEditing(){
+  ['fio','iin','birth','num','date','exp'].forEach(id => {
+    const el = document.getElementById(id);
+    if(!el) return;
+
+    el.addEventListener('click', function(){
+      enableReqEdit(this);
+    });
+
+    el.addEventListener('blur', function(){
+      saveReqEdit(this);
+    });
+
+    el.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){
+        e.preventDefault();
+        this.blur();
+      }
+    });
+  });
+}
+
+function loadReqValues(){
+  ['fio','iin','birth','num','date','exp'].forEach(id => {
+    const saved = localStorage.getItem('req_' + id);
+    if(saved !== null){
+      const el = document.getElementById(id);
+      if(el) el.value = saved;
+    }
+  });
+}
 
 function copyVal(id){
- navigator.clipboard.writeText(document.getElementById(id).innerText);
- const t=document.getElementById('toast');
- t.style.display='block';
- setTimeout(()=>t.style.display='none',1500);
+  const el = document.getElementById(id);
+  const value = el.value !== undefined ? el.value : el.innerText;
+
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(value).catch(() => fallbackCopy(value));
+  }else{
+    fallbackCopy(value);
+  }
+  showToast('Скопировано');
 }
+
+function fallbackCopy(text){
+  const area = document.createElement('textarea');
+  area.value = text;
+  area.style.position = 'fixed';
+  area.style.opacity = '0';
+  document.body.appendChild(area);
+  area.select();
+  try { document.execCommand('copy'); } catch(e) {}
+  area.remove();
+}
+
+function showToast(message){
+  const t=document.getElementById('toast');
+  t.textContent=message;
+  t.style.display='block';
+  setTimeout(()=>t.style.display='none',1500);
+}
+
+loadReqValues();
+setupReqEditing();
+
+
+function fallbackCopy(text){
+  const textarea=document.createElement('textarea');
+  textarea.value=text;
+  textarea.style.position='fixed';
+  textarea.style.left='-9999px';
+  document.body.appendChild(textarea);
+  textarea.select();
+
+  try{
+    document.execCommand('copy');
+  }catch(error){
+    console.error('Копирование не удалось:',error);
+  }
+
+  textarea.remove();
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  setupImageUpload('fileFront','cardFront');
+  setupImageUpload('fileBack','cardBack');
+
+  // По умолчанию открываем документ
+  switchTab('doc');
+});
 </script>
 
 </body>
