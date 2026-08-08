@@ -611,129 +611,9 @@ font-size:13px;
 display:none;
 z-index:9999;
 }
-
-/* ===== iPhone 15 mobile layout ===== */
-html{
-  width:100%;
-  min-height:100%;
-  background:#f2f3f5;
-  -webkit-text-size-adjust:100%;
-}
-body{
-  width:100%;
-  min-width:0 !important;
-  max-width:100% !important;
-  margin:0 !important;
-  padding:0 !important;
-  overflow-x:hidden !important;
-  background:#f2f3f5;
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Arial,sans-serif;
-}
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-}
-button,a{
-  touch-action:manipulation;
-}
-input,button,textarea,select{
-  font-size:16px; /* не вызывает zoom в iOS */
-}
-
-/* Основной экран телефона */
-.app,.phone,.container,.screen,.page{
-  width:100% !important;
-  max-width:100% !important;
-  min-width:0 !important;
-}
-.screen{
-  min-height:100vh;
-  min-height:100dvh;
-}
-
-/* Убираем лишние горизонтальные отступы */
-main,.content,.screen-content,.page-content{
-  max-width:100% !important;
-}
-
-/* Без скролла всей страницы, если приложение использует внутренний экран */
-body{
-  overscroll-behavior-x:none;
-}
-
-/* Нижнее меню учитывает Home Indicator iPhone */
-.bottom-nav,.bottom-menu,.tab-bar,.nav-bottom{
-  padding-bottom:max(10px, env(safe-area-inset-bottom)) !important;
-}
-
-/* iPhone 15: ширина 393px */
-@media (min-width:380px) and (max-width:430px){
-  body{
-    font-size:15px;
-  }
-
-  .header,.topbar,.app-header{
-    padding-left:16px !important;
-    padding-right:16px !important;
-  }
-
-  .content,.screen-content,.page-content,.container{
-    padding-left:16px !important;
-    padding-right:16px !important;
-  }
-
-  .card,.block,.section,.req-container{
-    width:100% !important;
-    max-width:100% !important;
-  }
-
-  .req-item{
-    min-width:0 !important;
-  }
-
-  .req-val{
-    max-width:100% !important;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-
-  /* Кнопки удобны для пальца */
-  button{
-    min-height:44px;
-  }
-
-  /* Не оставляем пустые большие поля */
-  .hero,.banner,.promo{
-    margin-top:8px !important;
-    margin-bottom:12px !important;
-  }
-
-  /* Скрываем типичные desktop-only элементы */
-  .desktop-only,
-  .desktop-sidebar,
-  .sidebar{
-    display:none !important;
-  }
-}
-
-/* Очень узкие iPhone/SE */
-@media (max-width:379px){
-  .content,.screen-content,.page-content,.container{
-    padding-left:12px !important;
-    padding-right:12px !important;
-  }
-}
-
-/* Скрываем полосы прокрутки */
-::-webkit-scrollbar{
-  width:0;
-  height:0;
-  display:none;
-}
-
 </style>
 </head>
-<body style="padding-top:env(safe-area-inset-top); padding-bottom:env(safe-area-inset-bottom);">
+<body>
 
 <div class="phone">
 
@@ -757,7 +637,7 @@ body{
 
 <div class="avatar">
 <!-- ВСТАВЬ СВОЕ ФОТО -->
-<img src="image/avatar.jpeg" alt="avatar">
+
 </div>
 
 <div class="pin-title">Код быстрого доступа</div>
