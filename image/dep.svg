@@ -1,0 +1,5 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" rx="42" fill="#F0C200"/>
+  <!-- Символ Тенге ₸ -->
+  <path d="M50 68H150M50 86H150M100 86V142" stroke="white" stroke-width="15" stroke-linecap="square"/>
+</svg>

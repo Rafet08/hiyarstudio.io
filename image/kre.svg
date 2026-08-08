@@ -1,0 +1,11 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="200" height="200" rx="42" fill="#8EC641"/>
+  <!-- Купюра / Карточка с символом тенге -->
+  <rect x="36" y="58" width="105" height="70" rx="10" stroke="white" stroke-width="7" fill="none"/>
+  <line x1="36" y1="78" x2="141" y2="78" stroke="white" stroke-width="7"/>
+  <!-- Символ ₸ внутри карточки -->
+  <path d="M54 90H74M54 96H74M64 96V114" stroke="white" stroke-width="4.5" stroke-linecap="square"/>
+  <!-- Рука -->
+  <path d="M126 142 C122 130, 116 122, 108 120 C100 118, 92 122, 88 126" stroke="white" stroke-width="7" stroke-linecap="round" fill="none"/>
+  <path d="M112 144 C120 138, 128 132, 134 122 C138 114, 136 106, 130 102" stroke="white" stroke-width="7" stroke-linecap="round" fill="none"/>
+</svg>
